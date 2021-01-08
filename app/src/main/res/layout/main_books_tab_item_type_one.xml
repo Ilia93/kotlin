@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="-1"
+    android:layout_height="-1">
+
+    <androidx.cardview.widget.CardView
+        android:id="@ref/0x7f08007b"
+        android:layout_width="-1"
+        android:layout_height="dimension(66561)"
+        android:layout_margin="@ref/0x7f060050"
+        app:cardCornerRadius="@ref/0x7f060060"
+        app:layout_constraintEnd_toEndOf="0"
+        app:layout_constraintStart_toStartOf="0"
+        app:layout_constraintTop_toTopOf="0">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:background="@ref/0x7f0700ac"
+            android:layout_width="-1"
+            android:layout_height="-1">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@ref/0x7f0800f0"
+                android:background="@ref/0x7f0700ae"
+                android:layout_width="@ref/0x7f0600a3"
+                android:layout_height="@ref/0x7f0600a2"
+                android:src="@ref/0x7f07008c"
+                app:layout_constraintBottom_toBottomOf="0"
+                app:layout_constraintEnd_toEndOf="0"
+                app:layout_constraintHorizontal_bias="1026564288.000000"
+                app:layout_constraintStart_toStartOf="0"
+                app:layout_constraintTop_toTopOf="0"
+                app:layout_constraintVertical_bias="1033073856.000000" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:textSize="@ref/0x7f060167"
+                android:layout_width="-2"
+                android:layout_height="-2"
+                android:text="@ref/0x7f0f0038"
+                app:layout_constraintBottom_toBottomOf="0"
+                app:layout_constraintEnd_toEndOf="0"
+                app:layout_constraintHorizontal_bias="1046361408.000000"
+                app:layout_constraintStart_toEndOf="@ref/0x7f0800f0"
+                app:layout_constraintTop_toTopOf="0"
+                app:layout_constraintVertical_bias="1037503040.000000"
+                style="@ref/0x7f100183" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@ref/0x7f08006d"
+                android:layout_width="-1"
+                android:layout_height="dimension(46081)"
+                android:layout_marginBottom="dimension(4097)"
+                app:layout_constraintBottom_toBottomOf="0"
+                app:layout_constraintEnd_toEndOf="0"
+                app:layout_constraintHorizontal_bias="0.000000"
+                app:layout_constraintStart_toStartOf="0" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@ref/0x7f08006c"
+        android:layout_width="-1"
+        android:layout_height="dimension(15361)"
+        android:layout_margin="@ref/0x7f060050"
+        app:layout_constraintEnd_toEndOf="0"
+        app:layout_constraintStart_toStartOf="0"
+        app:layout_constraintTop_toBottomOf="@ref/0x7f08007b" />
+</androidx.constraintlayout.widget.ConstraintLayout>

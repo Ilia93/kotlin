@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.AppCompatButton
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_fragment_buttons_recycler_view_item"
+    android:padding="5dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Текст кнопки"
+    android:drawableStart="@drawable/ic_my_books_info_star_24"
+    android:backgroundTint="@color/white" />

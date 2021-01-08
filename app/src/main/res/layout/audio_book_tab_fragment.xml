@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:layout_margin="@dimen/all_margin_10dp"
+    app:cardCornerRadius="@dimen/all_corner_radius_10dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@drawable/orange_gradient"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@ref/0x7f0800ee"
+            android:layout_width="@ref/0x7f0600a3"
+            android:layout_height="@ref/0x7f0600a2"
+            android:src="@ref/0x7f07008c"
+            app:layout_constraintBottom_toBottomOf="0"
+            app:layout_constraintEnd_toEndOf="0"
+            app:layout_constraintHorizontal_bias="1027369600.000000"
+            app:layout_constraintStart_toStartOf="0"
+            app:layout_constraintTop_toTopOf="0"
+            app:layout_constraintVertical_bias="1039918976.000000" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@ref/0x7f0f0038"
+            app:layout_constraintBottom_toBottomOf="0"
+            app:layout_constraintEnd_toEndOf="0"
+            app:layout_constraintHorizontal_bias="1033208064.000000"
+            app:layout_constraintStart_toEndOf="@ref/0x7f0800ee"
+            app:layout_constraintTop_toTopOf="0"
+            app:layout_constraintVertical_bias="1045019200.000000"
+            style="@ref/0x7f100184" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@ref/0x7f0800ef"
+            android:layout_width="-1"
+            android:layout_height="dimension(25601)"
+            android:layout_marginBottom="dimension(4097)"
+            app:layout_constraintBottom_toBottomOf="0"
+            app:layout_constraintEnd_toEndOf="0"
+            app:layout_constraintHorizontal_bias="0.000000"
+            app:layout_constraintStart_toStartOf="0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

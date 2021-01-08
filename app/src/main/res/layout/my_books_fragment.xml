@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black_haze">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/all_margin_10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/my_books_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/all_margin_5dp"
+            android:padding="5dp"
+            android:text="@string/my_books_top_tag"
+            android:textColor="@color/black"
+            android:textSize="@dimen/my_books_text_size_top_22sp"
+            android:textStyle="bold" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/my_books_top_card"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:cardCornerRadius="@dimen/all_corner_radius_10dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/my_books_top_recycler_view"
+                android:layout_width="wrap_content"
+                android:layout_height="150dp"
+                android:background="@drawable/orange_gradient" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/my_books_available_offline"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="bottom"
+                android:clickable="true"
+                android:focusable="true">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableStart="@drawable/ic_my_books_offline_24"
+                    android:text="@string/my_books_available_offline"
+                    android:textStyle="bold" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/my_books_offline_count"
+                    style="@style/TextView.Brown"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_weight="10"
+                    android:text="@string/my_books_zero_count"
+                    android:textAlignment="center"
+                    android:textSize="17sp" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/my_books_middle_card"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginTop="@dimen/all_margin_20dp"
+            app:cardCornerRadius="@dimen/all_corner_radius_10dp">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="start"
+                android:clickable="true"
+                android:focusable="true">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:drawableStart="@drawable/ic_my_books_want_read_24"
+                    android:text="@string/my_books_want_to_read"
+                    android:textStyle="bold" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/my_books_want_read_count"
+                    style="@style/TextView.Brown"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_weight="10"
+                    android:text="@string/my_books_zero_count"
+                    android:textAlignment="center"
+                    android:textSize="17sp" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:clickable="true"
+                android:focusable="true">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:drawableStart="@drawable/ic_my_books_read_24"
+                    android:text="@string/my_books_read"
+                    android:textStyle="bold" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/my_books_read_count"
+                    style="@style/TextView.Brown"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_weight="10"
+                    android:text="@string/my_books_zero_count"
+                    android:textAlignment="center"
+                    android:textSize="17sp" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="bottom"
+                android:clickable="true"
+                android:focusable="true">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:drawableStart="@drawable/ic_my_books_finish_read_24"
+                    android:text="@string/my_books_finished_read"
+                    android:textStyle="bold" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/my_books_finished_count"
+                    style="@style/TextView.Brown"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_weight="10"
+                    android:text="@string/my_books_zero_count"
+                    android:textAlignment="center"
+                    android:textSize="17sp" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.cardview.widget.CardView>
+
+        <FrameLayout
+            android:id="@+id/my_books_shelves_frame"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/all_margin_20dp"
+            android:layout_height="wrap_content">
+
+        </FrameLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.core.widget.NestedScrollView>

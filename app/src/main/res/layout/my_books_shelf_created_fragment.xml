@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/my_shelf_created_card"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        app:cardCornerRadius="@dimen/all_corner_radius_10dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/TextView.Black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_margin="@dimen/all_margin_10dp"
+            android:text="@string/my_books_my_shelves"
+            android:textSize="12sp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/my_shelf_created_text"
+            style="@style/TextView.Brown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_margin="@dimen/all_margin_10dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="Все" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="150dp"
+            android:layout_height="80dp"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="@dimen/all_margin_10dp"
+            android:layout_marginBottom="@dimen/all_margin_20dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:cardCornerRadius="@dimen/all_corner_radius_10dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/TextView.Black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:padding="5dp"
+                android:text="@string/my_books_top_tag" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:padding="5dp"
+                android:text="@string/my_books_no_shelf"
+                android:textSize="12sp" />
+        </androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
+</androidx.appcompat.widget.LinearLayoutCompat>

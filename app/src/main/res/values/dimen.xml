@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="all_corner_radius_5dp">5dp</dimen>
+    <dimen name="all_margin_10dp">10dp</dimen>
+    <dimen name="all_margin_5dp">5dp</dimen>
+    <dimen name="all_margin_20dp">20dp</dimen>
+    <dimen name="all_corner_radius_10dp">10dp</dimen>
+    <dimen name="card_text_size_10sp">10sp</dimen>
+    <dimen name="my_shelf_ready_toolbar_margin_20dp">20dp</dimen>
+    <dimen name="my_shelf_padding_btn_5dp">5dp</dimen>
+    <dimen name="my_shelf_text_size_button_text_12sp">12sp</dimen>
+    <dimen name="search_screen_text_size_15sp">15sp</dimen>
+    <dimen name="search_screen_text_size_17sp">17sp</dimen>
+    <dimen name="search_screen_text_size_25sp">25sp</dimen>
+    <dimen name="my_books_shelf_text_size_8sp">8sp</dimen>
+    <dimen name="my_books_text_size_top_22sp">22sp</dimen>
+</resources>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.AppCompatImageView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/my_books_top_recycler_view_image"
+    android:layout_width="110dp"
+    android:layout_height="180dp"
+    android:layout_gravity="start">
+</androidx.appcompat.widget.AppCompatImageView>

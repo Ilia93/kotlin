@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="bottom_nav_item_choose">Что выбрать?</string>
+    <string name="bottom_nav_item_my_books">Мои книги</string>
+    <string name="bottom_nav_item_profile">Профиль</string>
+    <string name="bottom_nav_item_search">Поиск</string>
+    <string name="books_tab_new_books_btn">Новинки</string>
+    <string name="books_tab_recommendations">Рекомендации на сегодня</string>
+    <string name="books_tab_top_audio_books">Топ аудиокниг</string>
+    <string name="books_tab_label">Книги</string>
+    <string name="audio_books_tab_label">Аудиокниги</string>
+</resources>
