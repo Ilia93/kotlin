@@ -14,7 +14,7 @@
             android:layout_height="100dp">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/main_fragment_cards_recycler_view"
+                android:id="@+id/main_fragment_top_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:layout_gravity="center" />

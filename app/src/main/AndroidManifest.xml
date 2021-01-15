@@ -2,8 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.pocketbook">
 
-    <uses-permission
-        android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -12,23 +11,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PocketBook">
-        <activity
-            android:name="com.example.pocketbook.presentation.screen.splash.SplashScreen">
+        <activity android:name=".screen.splash.SplashScreen">
 
             <intent-filter>
 
-                <action
-                    android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN" />
 
-                <category
-                    android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity
-            android:name="com.example.pocketbook.presentation.screen.main.MainActivity" />
+        <activity android:name=".screen.main.MainActivity" />
 
-        <activity
-            android:name="com.example.pocketbook.presentation.screen.main.top.ScreenPage" />
+        <activity android:name=".screen.main.top.ScreenPage" />
     </application>
 </manifest>
