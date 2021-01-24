@@ -10,25 +10,25 @@ import com.example.pocketbook.data.network.model.BookModel
 import com.example.pocketbook.screen.main.top.ItemListener
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 
-class MyBooksListAdapter(
+class MyBooksTopListAdapter(
     private val context: Context?,
     private val listener: ItemListener<BookModel>,
     private val listOfItems: List<BookModel>
-) : RecyclerView.Adapter<MyBooksListHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyBooksListHolder {
+) : RecyclerView.Adapter<MyBooksTopListHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyBooksTopListHolder {
         val view = LayoutInflater.from(context)
             .inflate(R.layout.my_books_top_recycler_view_item, parent, false)
-        return MyBooksListHolder(view, listener, listOfItems)
+        return MyBooksTopListHolder(view, listener, listOfItems)
     }
 
-    override fun onBindViewHolder(holder: MyBooksListHolder, position: Int) {
+    override fun onBindViewHolder(holderTop: MyBooksTopListHolder, position: Int) {
         val model = listOfItems[position]
-        holder.bindItemListener()
+        holderTop.bindItemListener()
         if (context != null) {
             Glide.with(context)
                 .load(model.imageUrl)
                 .transform(RoundedCornersTransformation(10, 10))
-                .into(holder.binding.myBooksTopRecyclerViewImage)
+                .into(holderTop.binding.myBooksTopRecyclerViewImage)
         }
     }
 

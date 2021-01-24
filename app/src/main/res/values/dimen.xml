@@ -10,6 +10,7 @@
     <dimen name="my_shelf_padding_btn_5dp">5dp</dimen>
     <dimen name="my_shelf_text_size_button_text_12sp">12sp</dimen>
     <dimen name="search_screen_text_size_15sp">15sp</dimen>
+    <dimen name="search_screen_text_size_13sp">13sp</dimen>
     <dimen name="search_screen_text_size_17sp">17sp</dimen>
     <dimen name="search_screen_text_size_25sp">25sp</dimen>
     <dimen name="my_books_shelf_text_size_8sp">8sp</dimen>

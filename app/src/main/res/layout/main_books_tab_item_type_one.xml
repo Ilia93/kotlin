@@ -33,12 +33,13 @@
                 style="@style/TextView.Black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="24dp"
                 android:text="@string/books_tab_recommendations"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.127"
-                app:layout_constraintStart_toEndOf="@+id/audio_book_tab_user_image"
+                app:layout_constraintHorizontal_bias="0.027"
+                app:layout_constraintStart_toEndOf="@+id/book_tab_user_image"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.recyclerview.widget.RecyclerView

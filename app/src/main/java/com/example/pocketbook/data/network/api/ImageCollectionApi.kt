@@ -5,6 +5,6 @@ import retrofit2.Call
 import retrofit2.http.GET
 
 interface ImageCollectionApi {
-    @GET("data/imageCollections")
+    @GET("data/ImageCollections")
     fun getUrls(): Call<List<ImageCollectionModel>>
 }

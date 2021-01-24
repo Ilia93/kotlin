@@ -19,7 +19,8 @@ import com.example.pocketbook.screen.main.MainActivity.Companion.LOAD_ERROR
 import com.example.pocketbook.screen.main.top.ItemListener
 import com.example.pocketbook.screen.my_books.info.MyBooksInfoFragment
 import com.example.pocketbook.screen.my_books.my_shelf.CreatedShelfFragment
-import com.example.pocketbook.screen.my_books.recycler_view.MyBooksListAdapter
+import com.example.pocketbook.screen.my_books.my_shelf.DefaultShelfFragment
+import com.example.pocketbook.screen.my_books.recycler_view.MyBooksTopListAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -35,8 +36,6 @@ class MyBooksFragment : Fragment(), ItemListener<BookModel> {
     }
 
     private val FINISHED = "Прочитал"
-    private val MAIN_FRAME = R.id.main_frame
-    private val MY_BOOKS_FRAME = R.id.my_books_shelves_frame
     private val supportFragmentManager: FragmentManager? = activity?.supportFragmentManager
     private val OFFLINE = "Доступны оффлайн"
     private val READ = "Читаю"
@@ -57,8 +56,11 @@ class MyBooksFragment : Fragment(), ItemListener<BookModel> {
 
     override fun onResume() {
         super.onResume()
-        if (arguments?.getBoolean("shelf_name_true") == true) {
-            changeFragment(CreatedShelfFragment.getInstance(), MY_BOOKS_FRAME, null, null)
+        val bundle = arguments
+        if (bundle != null) {
+            changeShelfFragment(CreatedShelfFragment.getInstance())
+        } else {
+            changeShelfFragment(DefaultShelfFragment.getInstance())
         }
         showBooks()
     }
@@ -67,7 +69,7 @@ class MyBooksFragment : Fragment(), ItemListener<BookModel> {
         binding.myBooksAvailableOffline.setOnClickListener(View.OnClickListener {
             changeFragment(
                 MyBooksInfoFragment.getInstance(),
-                MAIN_FRAME,
+                R.id.main_frame,
                 OFFLINE,
                 binding.myBooksOfflineCount.text as String
             )
@@ -75,7 +77,7 @@ class MyBooksFragment : Fragment(), ItemListener<BookModel> {
         binding.myBooksWantToRead.setOnClickListener(View.OnClickListener {
             changeFragment(
                 MyBooksInfoFragment.getInstance(),
-                MAIN_FRAME,
+                R.id.main_frame,
                 WANT_TO_READ,
                 binding.myBooksWantReadCount.text as String
             )
@@ -83,13 +85,13 @@ class MyBooksFragment : Fragment(), ItemListener<BookModel> {
         binding.myBooksRead.setOnClickListener(View.OnClickListener {
             changeFragment(
                 MyBooksInfoFragment.getInstance(),
-                MAIN_FRAME, READ, binding.myBooksReadCount.text as String
+                R.id.main_frame, READ, binding.myBooksReadCount.text as String
             )
         })
         binding.myBooksFinished.setOnClickListener(View.OnClickListener {
             changeFragment(
                 MyBooksInfoFragment.getInstance(),
-                MAIN_FRAME,
+                R.id.main_frame,
                 FINISHED,
                 binding.myBooksFinishedCount.text as String
             )
@@ -122,13 +124,20 @@ class MyBooksFragment : Fragment(), ItemListener<BookModel> {
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.myBooksTopRecyclerView.layoutManager = linearLayoutManager
         val list: List<BookModel>? = response.body()
-        val adapter = list?.let { MyBooksListAdapter(context, this, it) }
+        val adapter = list?.let { MyBooksTopListAdapter(context, this, it) }
         binding.myBooksTopRecyclerView.adapter = adapter
 
     }
 
     private fun showToast(text: String) {
         Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun changeShelfFragment(fragment: Fragment) {
+        fragmentManager
+            ?.beginTransaction()
+            ?.replace(R.id.my_books_shelves_frame, fragment)
+            ?.commit()
     }
 
     private fun changeFragment(fragment: Fragment, frame: Int, title: String?, subTitle: String?) {

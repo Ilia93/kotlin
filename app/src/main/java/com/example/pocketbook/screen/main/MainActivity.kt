@@ -9,6 +9,8 @@ import androidx.fragment.app.FragmentTransaction
 import com.example.pocketbook.R
 import com.example.pocketbook.databinding.MainActivityBinding
 import com.example.pocketbook.screen.my_books.MyBooksFragment
+import com.example.pocketbook.screen.profile.UserProfileFragment
+import com.example.pocketbook.screen.search.SearchScreenFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
@@ -50,6 +52,14 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.bottom_nav_my_books -> {
                     changeFragment(MyBooksFragment.getInstance())
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.bottom_nav_search -> {
+                    changeFragment(SearchScreenFragment.getInstance())
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.bottom_nav_profile -> {
+                    changeFragment(UserProfileFragment.getInstance())
                     return@OnNavigationItemSelectedListener true
                 }
             }

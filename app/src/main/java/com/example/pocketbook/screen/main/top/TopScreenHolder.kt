@@ -10,14 +10,12 @@ class TopScreenHolder(
     private val itemClicked: ItemListener<ImageCollectionModel>,
     private val listOfItems: List<ImageCollectionModel>
 ) : RecyclerView.ViewHolder(itemView) {
-        val binding = MainTopCardViewItemBinding.bind(itemView)
+    val binding = MainTopCardViewItemBinding.bind(itemView)
 
     fun bindClickListener() {
         itemView.setOnClickListener {
             itemClicked.itemClicked(
-                listOfItems.get(
-                    layoutPosition
-                )
+                listOfItems[layoutPosition]
             )
         }
     }

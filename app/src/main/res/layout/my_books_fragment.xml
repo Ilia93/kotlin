@@ -25,13 +25,13 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/my_books_top_card"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="230dp"
             app:cardCornerRadius="@dimen/all_corner_radius_10dp">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/my_books_top_recycler_view"
                 android:layout_width="wrap_content"
-                android:layout_height="150dp"
+                android:layout_height="170dp"
                 android:background="@drawable/orange_gradient" />
 
             <androidx.appcompat.widget.LinearLayoutCompat
@@ -129,9 +129,7 @@
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_gravity="bottom"
-                android:clickable="true"
-                android:focusable="true">
+                android:layout_gravity="bottom">
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/my_books_finished"
@@ -158,7 +156,7 @@
         <FrameLayout
             android:id="@+id/my_books_shelves_frame"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/all_margin_20dp">
 
         </FrameLayout>

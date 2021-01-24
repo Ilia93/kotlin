@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager.widget.ViewPager
 import com.example.pocketbook.data.NetworkClient
+import com.example.pocketbook.data.network.api.ImageCollectionApi
 import com.example.pocketbook.data.network.model.ImageCollectionModel
 import com.example.pocketbook.databinding.MainFragmentBinding
 import com.example.pocketbook.screen.main.MainActivity.Companion.DATA_FAIL
@@ -44,9 +45,13 @@ class MainFragment : Fragment(), ItemListener<ImageCollectionModel> {
         bundle: Bundle?
     ): View {
         binding = MainFragmentBinding.inflate(layoutInflater, viewGroup, false)
-        setViewPage()
         showBookCollections()
         return binding.getRoot()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setViewPage()
     }
 
     private fun setViewPage() {
@@ -57,13 +62,13 @@ class MainFragment : Fragment(), ItemListener<ImageCollectionModel> {
     }
 
     private fun showBookCollections() {
-        NetworkClient.buildImageCollectionClient().getUrls().enqueue(
+        NetworkClient.buildRetrofitClient(ImageCollectionApi::class.java).getUrls().enqueue(
             object : Callback<List<ImageCollectionModel>> {
                 override fun onResponse(
                     call: Call<List<ImageCollectionModel>>,
                     response: Response<List<ImageCollectionModel>>
                 ) {
-                    if (response.isSuccessful && response.body() != null){
+                    if (response.isSuccessful) {
                         setRecyclerViewAdapter(response)
                     } else {
                         showToast(DATA_FAIL)

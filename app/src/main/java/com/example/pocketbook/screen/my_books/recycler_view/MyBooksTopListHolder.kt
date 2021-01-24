@@ -6,7 +6,7 @@ import com.example.pocketbook.data.network.model.BookModel
 import com.example.pocketbook.databinding.MyBooksTopRecyclerViewItemBinding
 import com.example.pocketbook.screen.main.top.ItemListener
 
-class MyBooksListHolder(
+class MyBooksTopListHolder(
     itemView: View,
     private val listener: ItemListener<BookModel>,
     private val listOfItems: List<BookModel>

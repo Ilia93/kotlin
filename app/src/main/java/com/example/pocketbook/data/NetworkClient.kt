@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object NetworkClient {
     private var retrofit: Retrofit =
         Retrofit.Builder()
-            .baseUrl("https://api.backendless.com/43478742-9746-20E5-FFE9-BCF4EF766800/AC1DB3CD-C562-4909-BAFB-732BB9688029/")
+            .baseUrl("https://api.backendless.com/204A222F-6DEE-D154-FF8F-539C88D83400/5E09FB45-952E-47FC-8835-1F40B5F790B4/")
             .addConverterFactory(
                 GsonConverterFactory.create()
             ).build()

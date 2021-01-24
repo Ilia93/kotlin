@@ -21,6 +21,7 @@ class MyBooksInfoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding = MyBooksBooksInfoFragmentBinding.inflate(inflater, container, false)
-        return binding.root
+        val view = binding.root
+        return view
     }
 }

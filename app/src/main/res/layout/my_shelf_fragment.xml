@@ -59,8 +59,7 @@
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@mipmap/books_smal"
-                    android:scaleType="center" />
+                    android:background="@color/brown"/>
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/my_shelf_load_poster"
@@ -107,8 +106,8 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="20dp"
                         android:text="@string/my_shelf_show_every_body_text"
                         android:textSize="15sp"
                         app:layout_constraintStart_toStartOf="parent"
@@ -144,6 +143,7 @@
                         android:textSize="15sp" />
 
                     <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/my_shelf_name_field"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/all_margin_10dp"
@@ -162,6 +162,7 @@
                         android:textSize="15sp" />
 
                     <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/my_shelf_description_field"
                         android:layout_width="match_parent"
                         android:layout_height="45sp"
                         android:layout_marginStart="@dimen/all_margin_10dp"

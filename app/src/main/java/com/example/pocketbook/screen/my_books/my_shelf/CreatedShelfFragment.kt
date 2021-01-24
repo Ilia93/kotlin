@@ -21,6 +21,7 @@ class CreatedShelfFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding = MyBooksShelfCreatedFragmentBinding.inflate(inflater, container, false)
-        return binding.root
+        val view = binding.root
+        return view
     }
 }
