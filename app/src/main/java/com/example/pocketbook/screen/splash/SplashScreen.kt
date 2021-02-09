@@ -18,7 +18,7 @@ class SplashScreen : AppCompatActivity() {
     override fun onCreate(bundle: Bundle?) {
         super.onCreate(bundle)
         val binding: SplashScreenActivityBinding =
-            SplashScreenActivityBinding.inflate(this.layoutInflater)
+            SplashScreenActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
         handler?.postDelayed(MemoryLeak(context = applicationContext), timer.toLong())
     }

@@ -16,12 +16,21 @@ class SelectedBookFragment : Fragment() {
         }
     }
 
+    lateinit var binding: SelectedBookFragmentBinding
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = SelectedBookFragmentBinding.inflate(inflater, container, false)
+        binding = SelectedBookFragmentBinding.inflate(inflater, container, false)
+        setNumber()
         return binding.root
+    }
+
+    private fun setNumber() {
+        val builder = StringBuilder()
+        builder.append("100").append(" ").append(binding.selectedBookReadersNumber.text)
+        binding.selectedBookReadersNumber.text = builder.toString()
     }
 }

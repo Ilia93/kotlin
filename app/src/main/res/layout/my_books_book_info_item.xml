@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/my_books_info_item_card"
     android:layout_width="match_parent"
     android:layout_height="190dp">
@@ -41,11 +40,12 @@
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="8sp"
+            android:visibility="invisible"
             app:layout_constraintStart_toEndOf="@+id/my_books_info_item_image"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/my_books_info_item_book"
+            android:id="@+id/my_books_info_book_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -58,7 +58,7 @@
             app:layout_constraintTop_toBottomOf="@+id/my_books_info_status" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/appCompatTextView"
+            android:id="@+id/my_books_info_book_author"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -66,7 +66,7 @@
             android:text="Автор книги"
             android:textSize="12sp"
             app:layout_constraintStart_toEndOf="@+id/my_books_info_item_image"
-            app:layout_constraintTop_toBottomOf="@+id/my_books_info_item_book" />
+            app:layout_constraintTop_toBottomOf="@+id/my_books_info_book_name" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="wrap_content"
@@ -75,39 +75,33 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.128"
             app:layout_constraintStart_toEndOf="@+id/my_books_info_item_image"
-            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView">
+            app:layout_constraintTop_toBottomOf="@+id/my_books_info_book_author">
 
-            <androidx.appcompat.widget.AppCompatImageView
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/my_books_book_info_rating_btn"
+                style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/all_margin_5dp"
-                android:background="@drawable/ic_my_books_info_star_24" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/my_books_info_item_rating"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:layout_marginEnd="@dimen/all_margin_20dp"
+                android:drawableStart="@drawable/ic_my_books_info_star_24"
+                android:padding="0dp"
                 android:text="0"
+                android:textAlignment="viewStart"
                 android:textColor="@color/black"
                 android:textSize="12sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ic_my_books_info_premium_24" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/my_books_info_item_subscribe_type"
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/my_books_book_info_subscribe_btn"
+                style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="Стандарт"
+                android:drawableStart="@drawable/ic_my_books_info_premium_24"
+                android:includeFontPadding="false"
+                android:padding="0dp"
+                android:text="@string/all_standard"
+                android:textAllCaps="false"
                 android:textColor="@color/black"
-                android:textSize="12sp"
-                android:textStyle="bold" />
+                android:textSize="12sp"/>
         </androidx.appcompat.widget.LinearLayoutCompat>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

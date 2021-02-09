@@ -8,16 +8,15 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/all_margin_10dp"
-        android:layout_marginEnd="@dimen/all_margin_10dp"
-        android:fitsSystemWindows="true"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:fitsSystemWindows="true">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/black_haze"
-            app:layout_scrollFlags="exitUntilCollapsed">
+            style="@style/Widget.AppCompat.Button.Borderless"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -37,19 +36,21 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/search_screen_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="24dp"
-            android:background="@color/light_grey"
-            app:layout_scrollFlags="exitUntilCollapsed">
+            android:layout_height="35dp"
+            android:minHeight="35dp"
+            android:background="@drawable/round_corners_5dp"
+            android:backgroundTint="@color/light_grey"
+            app:layout_scrollFlags="scroll|enterAlways">
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:backgroundTint="@color/light_grey"
                 android:orientation="horizontal">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:src="@drawable/ic_search_24" />
 
                 <androidx.appcompat.widget.AppCompatEditText
@@ -124,6 +125,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/search_screen_books_recycler_view"
                     android:layout_width="match_parent"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
                     android:layout_height="wrap_content" />
             </androidx.cardview.widget.CardView>
 

@@ -48,6 +48,9 @@ class MyShelfFragment : Fragment() {
         binding.myShelfLoadPoster.setOnClickListener(View.OnClickListener {
             showToast("Здесь пока пусто")
         })
+        binding.myShelfToolbar.setNavigationOnClickListener(View.OnClickListener {
+            changeFragment(MyBooksFragment.getInstance())
+        })
     }
 
     private fun changeFragment(fragment: Fragment) {

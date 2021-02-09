@@ -19,6 +19,16 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="TextView.Yellow" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/yellow</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextView.White" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="TextView.Black" parent="Widget.AppCompat.TextView">
         <item name="android:textColor">@color/black</item>
         <item name="android:textStyle">bold</item>

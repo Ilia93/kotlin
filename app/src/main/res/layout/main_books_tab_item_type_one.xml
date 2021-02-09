@@ -37,7 +37,6 @@
                 android:layout_marginTop="24dp"
                 android:text="@string/books_tab_recommendations"
                 android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.027"
                 app:layout_constraintStart_toEndOf="@+id/book_tab_user_image"
                 app:layout_constraintTop_toTopOf="parent" />

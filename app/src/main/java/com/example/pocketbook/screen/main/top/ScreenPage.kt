@@ -20,7 +20,7 @@ import retrofit2.Response
 
 class ScreenPage : AppCompatActivity() {
 
-    private lateinit var binding: com.example.pocketbook.databinding.ScreenPageActivityBinding
+    private lateinit var binding: ScreenPageActivityBinding
 
 
     private fun loadImage() {
@@ -30,7 +30,7 @@ class ScreenPage : AppCompatActivity() {
                     call: Call<List<ImageCollectionModel>>,
                     response: Response<List<ImageCollectionModel>>
                 ) {
-                    setBackGroundImage(list = response.body())
+                    setBackGroundImage(response.body())
                 }
 
                 override fun onFailure(call: Call<List<ImageCollectionModel>>, t: Throwable) {
@@ -66,13 +66,13 @@ class ScreenPage : AppCompatActivity() {
     }
 
     private fun setButtonClickListeners() {
-        binding.imageScreenCloseBtn.setOnClickListener(View.OnClickListener {
+        binding.imageScreenCloseBtn.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
-        })
-        binding.imageScreenActionButton.setOnClickListener(View.OnClickListener {
+        }
+        binding.imageScreenActionButton.setOnClickListener {
             showToast("Здесь пока пусто")
-        })
+        }
     }
 
     private fun showToast(text: String) {

@@ -46,7 +46,7 @@ class MainFragment : Fragment(), ItemListener<ImageCollectionModel> {
     ): View {
         binding = MainFragmentBinding.inflate(layoutInflater, viewGroup, false)
         showBookCollections()
-        return binding.getRoot()
+        return binding.root
     }
 
     override fun onResume() {
