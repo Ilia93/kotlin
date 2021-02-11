@@ -28,8 +28,9 @@ class SplashScreen : AppCompatActivity() {
 
         override fun run() {
             val context: Context? = weakReference.get()
-            context?.startActivity(Intent(context, MainActivity::class.java))
-           // context.finish()
+            val intent = Intent(context, MainActivity::class.java)
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            context?.startActivity(intent)
         }
     }
 }

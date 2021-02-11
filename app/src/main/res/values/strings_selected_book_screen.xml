@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="selectedBook_read">Читать</string>
+    <string name="selectedBook_appreciate_book">Оцените книгу</string>
+    <string name="selectedBook_premium_text">Доступ к книгам и аудиозаписям в одной подписке</string>
+    <string name="selectedBook_premium_free_period">Первые 14 дней бесплатно</string>
+    <string name="selectedBook_about_book">О книге</string>
 </resources>

@@ -12,6 +12,8 @@ data class BookModel(
      val bookDuration: String,
     @SerializedName("language")
      val bookLanguage: String,
+    @SerializedName("annotation")
+    val bookAnnotation: String,
     @SerializedName("name")
      val bookName: String,
     @SerializedName("rating")

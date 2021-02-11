@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="subscribe_screen_text_size_25_sp">25sp</dimen>
+</resources>

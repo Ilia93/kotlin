@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="subscribe_standard_subscribe">Стандартная подписка</string>
+    <string name="subscribe_premium_subscribe">Премиум подписка</string>
+    <string name="subscribe_trial_fourteen_days">14 дней бесплатно</string>
+    <string name="subscribe_trial_one_month">1 месяц</string>
+    <string name="subscribe_trial_one_year">12 месяцев</string>
+    <string name="subscribe_trial_1_month_price">5$</string>
+    <string name="subscribe_trial_1_year_price">50$</string>
+</resources>

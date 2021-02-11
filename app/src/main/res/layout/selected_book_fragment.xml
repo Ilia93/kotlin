@@ -1,209 +1,309 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/black_haze">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/appCompatImageView"
-            android:layout_width="match_parent"
-            android:layout_height="220dp"
-            android:background="@color/grey"
-            android:scaleType="centerCrop"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/selected_book_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/all_margin_10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <androidx.appcompat.widget.AppCompatImageButton
-                    android:id="@+id/selected_book_back"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:background="@color/white"
-                    android:src="@drawable/ic_back_brown_24" />
-
-                <androidx.appcompat.widget.AppCompatImageButton
-                    android:id="@+id/selected_book_share"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:background="@color/white"
-                    android:src="@drawable/ic_share_brown_24" />
-
-            </RelativeLayout>
-
-        </androidx.appcompat.widget.Toolbar>
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/selected_book_image"
-            android:layout_width="120dp"
-            android:layout_height="180dp"
-            android:layout_marginTop="120dp"
-            android:background="@drawable/round_corners_10dp"
-            android:backgroundTint="@color/yellow"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.054"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/selected_book_toolbar" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/selected_book_status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
-            android:text="Читаю"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/selected_book_toolbar" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/selected_book_name"
-            style="@style/TextView.White"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
-            android:text="Название книги"
-            android:textSize="@dimen/search_screen_text_size_17sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/selected_book_status" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/selected_book_author_tag"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="5dp"
-            android:text="Автор"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/selected_book_name" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/selected_book_author"
-            style="@style/TextView.Yellow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="5dp"
-            android:text="Имя автора"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/selected_book_author_tag" />
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/all_margin_10dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.054"
-            app:layout_constraintStart_toEndOf="@+id/selected_book_image"
-            app:layout_constraintTop_toBottomOf="@+id/appCompatImageView">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/black_haze">
 
-            <androidx.appcompat.widget.AppCompatRatingBar
-                android:id="@+id/selected_book_rating"
-                style="@style/Widget.AppCompat.RatingBar.Small"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:isIndicator="true"
-                android:progressTint="@color/black"
-                android:rating="3"
-                android:stepSize="0.5"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/appCompatImageView"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:background="@color/grey"
+                android:scaleType="centerCrop"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/selected_book_rating_mark"
-                style="@style/TextView.Black"
-                android:layout_width="wrap_content"
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/selected_book_toolbar"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="0"
-                android:textSize="20dp"
-                app:layout_constraintBottom_toBottomOf="@+id/selected_book_rating"
+                android:layout_marginEnd="@dimen/all_margin_10dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.106"
-                app:layout_constraintStart_toEndOf="@+id/selected_book_rating"
-                app:layout_constraintTop_toTopOf="@+id/selected_book_rating" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:id="@+id/selected_book_back"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:background="@color/white"
+                        android:src="@drawable/ic_back_brown_24" />
+
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:id="@+id/selected_book_share"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:background="@color/white"
+                        android:src="@drawable/ic_share_brown_24" />
+
+                </RelativeLayout>
+
+            </androidx.appcompat.widget.Toolbar>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/selected_book_image"
+                android:layout_width="120dp"
+                android:layout_height="180dp"
+                android:layout_marginTop="120dp"
+                android:background="@drawable/round_corners_10dp"
+                android:backgroundTint="@color/yellow"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.054"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/selected_book_toolbar" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/selected_book_readers_number"
+                android:id="@+id/selected_book_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="читателей оценили"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:text="Читаю"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/selected_book_toolbar" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/selected_book_name"
+                style="@style/TextView.White"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:text="Название книги"
+                android:textSize="@dimen/search_screen_text_size_17sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/selected_book_status" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/selected_book_author_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="5dp"
+                android:text="Автор"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/selected_book_name" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/selected_book_author"
+                style="@style/TextView.Yellow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="5dp"
+                android:text="Имя автора"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/selected_book_author_tag" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/all_margin_10dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.054"
+                app:layout_constraintStart_toEndOf="@+id/selected_book_image"
+                app:layout_constraintTop_toBottomOf="@+id/appCompatImageView">
+
+                <androidx.appcompat.widget.AppCompatRatingBar
+                    android:id="@+id/selected_book_rating"
+                    style="@style/Widget.AppCompat.RatingBar.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:isIndicator="true"
+                    android:progressTint="@color/black"
+                    android:rating="3"
+                    android:stepSize="0.5"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/selected_book_rating_mark"
+                    style="@style/TextView.Black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="20dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/selected_book_rating"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.106"
+                    app:layout_constraintStart_toEndOf="@+id/selected_book_rating"
+                    app:layout_constraintTop_toTopOf="@+id/selected_book_rating" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/selected_book_readers_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="читателей оценили"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/selected_book_rating" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/selected_book_pages_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="печатных страниц"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/selected_book_readers_number" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/selected_book_age_limit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0+"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/selected_book_pages_number" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/selected_book_subscribe_btn"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="81dp"
+                android:layout_height="30dp"
+                android:drawableStart="@drawable/ic_my_books_info_premium_24"
+                android:padding="0dp"
+                android:text="@string/all_standard"
+                android:textAllCaps="false"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.118"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/selected_book_image" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/linearLayoutCompat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/all_margin_10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/selected_book_subscribe_btn">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/selected_book_read_action_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="@dimen/all_margin_10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/orange_gradient"
+                    android:text="@string/selectedBook_read"
+                    android:textAllCaps="false"
+                    android:textSize="17sp" />
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/selected_book_add_action_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="8"
+                    android:background="@drawable/orange_gradient"
+                    android:padding="@dimen/all_margin_10dp"
+                    android:src="@drawable/ic_selected_book_add_24" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/selected_book_add_premium_card"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_margin="@dimen/all_margin_10dp"
+                app:cardCornerRadius="@dimen/all_corner_radius_10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/selected_book_rating" />
+                app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_my_books_info_premium_24"
+                    android:text="@string/selectedBook_premium_text"
+                    android:textAlignment="viewStart"
+                    android:textAllCaps="false"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginStart="@dimen/all_margin_10dp"
+                    android:layout_marginBottom="@dimen/all_margin_10dp"
+                    android:text="@string/selectedBook_premium_free_period"
+                    android:textColor="@color/black" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/linearLayoutCompat2"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="@dimen/all_margin_10dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/selected_book_add_premium_card">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="60dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/selectedBook_appreciate_book"
+                    android:textAlignment="viewStart" />
+
+                <androidx.appcompat.widget.AppCompatRatingBar
+                    style="@style/Widget.AppCompat.RatingBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:numStars="5" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/selected_book_pages_number"
+                android:id="@+id/appCompatTextView"
+                style="@style/TextView.Black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="печатных страниц"
+                android:layout_marginTop="8dp"
+                android:text="@string/selectedBook_about_book"
+                android:textSize="@dimen/search_screen_text_size_17sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.028"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/selected_book_readers_number" />
+                app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat2" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/selected_book_age_limit"
-                android:layout_width="wrap_content"
+                android:id="@+id/selected_book_annotation"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="0+"
+                android:layout_margin="@dimen/all_margin_10dp"
+                android:text="Пустое описание"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/selected_book_pages_number" />
+                app:layout_constraintTop_toBottomOf="@+id/appCompatTextView" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/appCompatButton"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="81dp"
-            android:layout_height="30dp"
-            android:drawableStart="@drawable/ic_my_books_info_premium_24"
-            android:padding="0dp"
-            android:text="@string/all_standard"
-            android:textAllCaps="false"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.118"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/selected_book_image" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/orange_gradient"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:text="@string/selectedBook_read"
-            android:textAllCaps="false"
-            android:textSize="17sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appCompatButton" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/orange_gradient"
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.core.widget.NestedScrollView>

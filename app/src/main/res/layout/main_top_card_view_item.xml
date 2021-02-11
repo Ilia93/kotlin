@@ -2,8 +2,8 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_fragment_top_recycler_view_item"
-    android:layout_width="100dp"
-    android:layout_height="100dp"
+    android:layout_width="110dp"
+    android:layout_height="110dp"
     android:layout_marginStart="@dimen/all_margin_5dp"
     android:layout_marginEnd="@dimen/all_margin_5dp"
     app:cardCornerRadius="@dimen/all_corner_radius_10dp">
@@ -16,7 +16,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_gravity="bottom"
         android:background="@drawable/grey_gradient" />
 
