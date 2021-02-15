@@ -7,4 +7,10 @@
     <string name="subscribe_trial_one_year">12 месяцев</string>
     <string name="subscribe_trial_1_month_price">5$</string>
     <string name="subscribe_trial_1_year_price">50$</string>
+    <string name="subscribe_description">При первом оформлении подписки вы получаете бесплатный
+        пробный период на 14 дней для чтения книг из стандартного каталога.
+
+        Если Вы не хотите оплачивать подписку, вы можете выключить автоматическое продление
+        за 24 часа до окончания пробного периода
+    </string>
 </resources>

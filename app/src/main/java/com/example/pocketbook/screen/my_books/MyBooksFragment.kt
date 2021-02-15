@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction.TRANSIT_FRAGMENT_OPEN
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pocketbook.R
@@ -36,7 +35,6 @@ class MyBooksFragment : Fragment(), ItemListener<BookModel> {
     }
 
     private val FINISHED = "Прочитал"
-    private val supportFragmentManager: FragmentManager? = activity?.supportFragmentManager
     private val OFFLINE = "Доступны оффлайн"
     private val READ = "Читаю"
     private val WANT_TO_READ = "Хочу прочитать"
@@ -148,13 +146,29 @@ class MyBooksFragment : Fragment(), ItemListener<BookModel> {
         } else {
             arguments.putString(SUB_TITLE_STRING_KEY, subTitle)
         }
-        supportFragmentManager?.beginTransaction()?.replace(frame, fragment)?.commit()
+        activity?.supportFragmentManager?.beginTransaction()?.replace(frame, fragment)
+            ?.addToBackStack("selected")?.commit()
     }
 
     override fun itemClicked(model: BookModel) {
         val supportFragmentManager = activity?.supportFragmentManager
         val fragmentTransaction = supportFragmentManager?.beginTransaction()
-            ?.replace(R.id.main_frame, SelectedBookFragment.getInstance())
+            ?.replace(
+                R.id.main_frame,
+                SelectedBookFragment.getInstance(
+                    model.bookRating,
+                    model.imageUrl,
+                    model.bookName,
+                    model.bookAuthor,
+                    model.bookAnnotation,
+                    model.ageLimit,
+                    model.typeOfBookSubscribe,
+                    model.isBookFinished,
+                    model.bookLanguage,
+                    model.bookStyle,
+                    model.bookSeries
+                )
+            )
         fragmentTransaction?.setTransition(TRANSIT_FRAGMENT_OPEN)
         fragmentTransaction?.commit()
     }

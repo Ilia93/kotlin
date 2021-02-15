@@ -22,7 +22,6 @@
         </activity>
 
         <activity android:name=".screen.main.MainActivity" />
-
         <activity android:name=".screen.main.top.ScreenPage" />
     </application>
 </manifest>

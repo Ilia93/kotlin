@@ -6,6 +6,9 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface BookApi {
-    @GET("/data/Book?pageSize=15")
+    @GET("data/Book")
     fun getBooks(): Call<List<BookModel>>
+
+    @GET("data/Book")
+    fun getBookAuthor(@Query("bookAuthor") author: String): Call<List<BookModel>>
 }

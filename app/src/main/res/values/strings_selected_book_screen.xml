@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="selectedBook_read">Читать</string>
+    <string name="selectedBook_finished_read_status">Прочитал</string>
+    <string name="selectedBook_read_status">Читаю</string>
+    <string name="selectedBook_want_to_read_status">Хочу прочитать</string>
     <string name="selectedBook_appreciate_book">Оцените книгу</string>
     <string name="selectedBook_premium_text">Доступ к книгам и аудиозаписям в одной подписке</string>
     <string name="selectedBook_premium_free_period">Первые 14 дней бесплатно</string>
     <string name="selectedBook_about_book">О книге</string>
+    <string name="selectedBook_language">Язык</string>
+    <string name="selectedBook_related_books">Похожие книги</string>
+    <string name="selectedBook_related_series">Входит в серию</string>
 </resources>

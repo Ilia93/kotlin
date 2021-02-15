@@ -14,7 +14,6 @@ import com.example.pocketbook.databinding.SearchScreenSelectedCategoryFragmentBi
 import com.example.pocketbook.screen.book.SelectedBookFragment
 import com.example.pocketbook.screen.main.MainActivity.Companion.LOAD_ERROR
 import com.example.pocketbook.screen.main.top.ItemListener
-import com.example.pocketbook.screen.my_books.info.MyBooksInfoFragment
 import com.example.pocketbook.screen.search.books_styles.BooksStylesFragment
 import retrofit2.Call
 import retrofit2.Callback
@@ -86,6 +85,20 @@ class CategoryFragment : Fragment(), ItemListener<BookModel> {
     }
 
     override fun itemClicked(model: BookModel) {
-        changeFragment(SelectedBookFragment.getInstance())
+        changeFragment(
+            SelectedBookFragment.getInstance(
+                model.bookRating,
+                model.imageUrl,
+                model.bookName,
+                model.bookAuthor,
+                model.bookAnnotation,
+                model.ageLimit,
+                model.typeOfBookSubscribe,
+                model.isBookFinished,
+                model.bookLanguage,
+                model.bookStyle,
+                model.bookSeries
+            )
+        )
     }
 }

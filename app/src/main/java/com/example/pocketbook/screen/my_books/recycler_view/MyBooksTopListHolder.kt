@@ -13,9 +13,9 @@ class MyBooksTopListHolder(
 ) : RecyclerView.ViewHolder(itemView) {
     val binding = MyBooksTopRecyclerViewItemBinding.bind(itemView)
 
-    fun bindItemListener(){
+    fun bindItemListener() {
         itemView.setOnClickListener(View.OnClickListener {
-            listener.itemClicked(listOfItems.get(layoutPosition))
+            listener.itemClicked(listOfItems[layoutPosition])
         })
     }
 }

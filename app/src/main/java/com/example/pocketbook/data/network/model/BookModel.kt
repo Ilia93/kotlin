@@ -5,7 +5,7 @@ import java.util.*
 
 data class BookModel(
     @SerializedName("age_limit")
-     val ageLimit: Int,
+     val ageLimit: String,
     @SerializedName("author")
      val bookAuthor: String,
     @SerializedName("duration")

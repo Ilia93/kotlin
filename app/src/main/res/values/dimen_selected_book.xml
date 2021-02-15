@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="selected_book_text_size_big_24_sp">24sp</dimen>
+    <dimen name="selected_book_text_size_medium_18_sp">18sp</dimen>
+    <dimen name="selected_book_margin_small_8_dp">8dp</dimen>
+</resources>

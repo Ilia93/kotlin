@@ -1,9 +1,6 @@
 package com.example.pocketbook.data
 
-import com.example.pocketbook.data.network.api.BookApi
-import com.example.pocketbook.data.network.api.CommentsApi
-import com.example.pocketbook.data.network.api.ImageCollectionApi
-import com.example.pocketbook.data.network.api.UserApi
+import com.example.pocketbook.data.network.api.*
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -23,6 +20,11 @@ object NetworkClient {
 
     fun buildBookApiClient(): BookApi {
         val create = retrofit.create(BookApi::class.java)
+        return create
+    }
+
+    fun buildBookAuthorApi(): BookAuthorApi {
+        val create = retrofit.create(BookAuthorApi::class.java)
         return create
     }
 

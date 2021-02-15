@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="book_author_small_margin_8_dp">8dp</dimen>
+    <dimen name="book_author_normal_margin_16_dp">16dp</dimen>
+    <dimen name="book_author_text_size_small_12_sp">12sp</dimen>
+    <dimen name="book_author_text_size_normal_18_sp">18sp</dimen>
+    <dimen name="book_author_text_size_big_24_sp">24sp</dimen>
+</resources>
