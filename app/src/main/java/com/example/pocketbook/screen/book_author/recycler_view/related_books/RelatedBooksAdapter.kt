@@ -1,11 +1,11 @@
-package com.example.pocketbook.screen.book_author
+package com.example.pocketbook.screen.book_author.recycler_view.related_books
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.pocketbook.R
 import com.example.pocketbook.data.network.model.BookModel
 import com.example.pocketbook.screen.main.top.ItemListener
@@ -17,7 +17,7 @@ class RelatedBooksAdapter(
     private val itemListener: ItemListener<BookModel>
 ) : RecyclerView.Adapter<RelatedBooksHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RelatedBooksHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.related_books_item, parent, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.selected_book_related_books_item, parent, false)
         return RelatedBooksHolder(view, listOfBooks, itemListener)
     }
 
@@ -27,9 +27,17 @@ class RelatedBooksAdapter(
         if (context != null) {
             Glide.with(context)
                 .load(model.imageUrl)
-                .transform(RoundedCornersTransformation(10,10,RoundedCornersTransformation.CornerType.ALL))
+                .transform(
+                    RoundedCornersTransformation(
+                        10,
+                        10,
+                        RoundedCornersTransformation.CornerType.ALL
+                    )
+                )
                 .into(holder.binding.relatedBookImage)
         }
+        holder.binding.relatedBookSeriesTag.text = model.seriesOrderTag
+        holder.binding.relatedBookSeriesTag.visibility = View.VISIBLE
         holder.binding.relatedBookRating.numStars = model.bookRating
         holder.binding.relatedBookName.text = model.bookName
         holder.binding.relatedBookAuthor.text = model.bookAuthor

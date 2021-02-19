@@ -166,7 +166,7 @@ class MyBooksFragment : Fragment(), ItemListener<BookModel> {
                     model.isBookFinished,
                     model.bookLanguage,
                     model.bookStyle,
-                    model.bookSeries
+                    model.bookSeries,
                 )
             )
         fragmentTransaction?.setTransition(TRANSIT_FRAGMENT_OPEN)

@@ -4,17 +4,27 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.pocketbook.R
+import com.example.pocketbook.data.NetworkClient
+import com.example.pocketbook.data.network.model.BookModel
 import com.example.pocketbook.databinding.SelectedBookFragmentBinding
 import com.example.pocketbook.screen.book_author.BookAuthorFragment
+import com.example.pocketbook.screen.book_author.recycler_view.related_books.RelatedBooksAdapter
+import com.example.pocketbook.screen.main.MainActivity.Companion.LOAD_ERROR
+import com.example.pocketbook.screen.main.top.ItemListener
 import com.example.pocketbook.screen.my_books.MyBooksFragment
 import com.example.pocketbook.screen.subscribe.SubscribeFragment
 import jp.wasabeef.glide.transformations.BlurTransformation
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-class SelectedBookFragment : Fragment() {
+class SelectedBookFragment : Fragment(), ItemListener<BookModel> {
 
     companion object {
 
@@ -70,9 +80,11 @@ class SelectedBookFragment : Fragment() {
     ): View {
         binding = SelectedBookFragmentBinding.inflate(inflater, container, false)
         setOnClickListeners()
+        loadBookSeries()
         return binding.root
     }
 
+    //TODO переделать метод, очень большой
     override fun onResume() {
         super.onResume()
         if (arguments?.getString(SELECTED_BOOK_URL_ARG) != null) {
@@ -133,8 +145,51 @@ class SelectedBookFragment : Fragment() {
             changeFragment(MyBooksFragment.getInstance())
         }
         binding.selectedBookAuthor.setOnClickListener(View.OnClickListener {
-            changeFragmentWithArguments(BookAuthorFragment.getInstance())
+            changeFragment(BookAuthorFragment.getInstance(binding.selectedBookAuthor.text.toString()))
         })
+    }
+
+    private fun loadBookSeries() {
+        NetworkClient.buildBookApiClient()
+            .getBookAuthor(arguments?.getString(SELECTED_BOOK_AUTHOR_ARG).toString()).enqueue(
+                object : Callback<List<BookModel>> {
+                    override fun onResponse(
+                        call: Call<List<BookModel>>,
+                        response: Response<List<BookModel>>
+                    ) {
+                        if (response.isSuccessful && response.body() != null) {
+                            setRecyclerViewAdapter(response)
+                        }
+                    }
+
+                    override fun onFailure(call: Call<List<BookModel>>, t: Throwable) {
+                        showToast(LOAD_ERROR)
+                    }
+
+                }
+            )
+    }
+
+    private fun setRecyclerViewAdapter(response: Response<List<BookModel>>) {
+        val linearLayoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        binding.selectedBookRelatedSeriesRecyclerView.layoutManager = linearLayoutManager
+        val list = response.body()
+        val bookSeries: MutableList<BookModel> = mutableListOf()
+        if (list != null) {
+            for (i in list.indices) {
+                if (list[i].bookSeries == arguments?.getString(SELECTED_BOOK_SERIES_ARG)) {
+                    bookSeries.add(list[i])
+                }
+            }
+        }
+        val adapter = bookSeries.let { RelatedBooksAdapter(context, it, this) }
+        binding.selectedBookRelatedSeriesRecyclerView.adapter = adapter
+    }
+
+
+    private fun showToast(text: String) {
+        Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
     }
 
     private fun changeFragment(fragment: Fragment) {
@@ -142,11 +197,21 @@ class SelectedBookFragment : Fragment() {
             ?.replace(R.id.main_frame, fragment)?.commit()
     }
 
-    private fun changeFragmentWithArguments(fragment: Fragment) {
-        val arguments = Bundle()
-        arguments.putString(SELECTED_BOOK_AUTHOR_ARG, binding.selectedBookAuthor.text.toString())
-        fragment.arguments = arguments
-        activity?.supportFragmentManager?.beginTransaction()
-            ?.replace(R.id.main_frame, fragment)?.commit()
+    override fun itemClicked(model: BookModel) {
+        changeFragment(
+            getInstance(
+                model.bookRating,
+                model.imageUrl,
+                model.bookName,
+                model.bookAuthor,
+                model.bookAnnotation,
+                model.ageLimit,
+                model.typeOfBookSubscribe,
+                model.isBookFinished,
+                model.bookLanguage,
+                model.bookStyle,
+                model.bookSeries,
+            )
+        )
     }
 }

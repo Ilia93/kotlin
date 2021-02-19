@@ -5,39 +5,41 @@ import java.util.*
 
 data class BookModel(
     @SerializedName("age_limit")
-     val ageLimit: String,
+    val ageLimit: String,
     @SerializedName("author")
-     val bookAuthor: String,
+    val bookAuthor: String,
     @SerializedName("duration")
-     val bookDuration: String,
+    val bookDuration: String,
     @SerializedName("language")
-     val bookLanguage: String,
+    val bookLanguage: String,
     @SerializedName("annotation")
     val bookAnnotation: String,
     @SerializedName("name")
-     val bookName: String,
+    val bookName: String,
     @SerializedName("rating")
-     val bookRating: Int,
+    val bookRating: Int,
     @SerializedName("reader")
-     val bookReader: String,
+    val bookReader: String,
     @SerializedName("series")
-     val bookSeries: String,
+    val bookSeries: String,
+    @SerializedName("series_order_tag")
+    val seriesOrderTag: String,
     @SerializedName("size")
-     val bookSize: String,
+    val bookSize: String,
     @SerializedName("style")
-     val bookStyle: String,
+    val bookStyle: String,
     @SerializedName("type")
-     val bookType: String,
+    val bookType: String,
     @SerializedName("date")
-     val dateOfBooksAdd: Date,
+    val dateOfBooksAdd: Date,
     @SerializedName("id")
-     val id: Int,
+    val id: Int,
     @SerializedName("image_url")
-     val imageUrl: String,
+    val imageUrl: String,
     @SerializedName("is_finished_flag")
-     val isBookFinished: Boolean,
+    val isBookFinished: Boolean,
     @SerializedName("followers")
-     val readersCount: Int,
+    val readersCount: Int,
     @SerializedName("subscribe_type")
-     val typeOfBookSubscribe: String
+    val typeOfBookSubscribe: String
 )

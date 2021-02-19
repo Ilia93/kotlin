@@ -8,5 +8,7 @@ data class BookAuthorModel(
     @SerializedName("biography")
     val authorBiography: String,
     @SerializedName("photo_url")
-    val bookAuthorImageUrl: String
+    val bookAuthorImageUrl: String,
+    @SerializedName("style")
+    val bookAuthorStyle: String
 )

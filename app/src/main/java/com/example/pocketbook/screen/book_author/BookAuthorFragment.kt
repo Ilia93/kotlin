@@ -15,8 +15,11 @@ import com.example.pocketbook.data.network.model.BookModel
 import com.example.pocketbook.databinding.BookAuthorFragmentBinding
 import com.example.pocketbook.screen.book.SelectedBookFragment
 import com.example.pocketbook.screen.book.SelectedBookFragment.Companion.SELECTED_BOOK_AUTHOR_ARG
+import com.example.pocketbook.screen.book_author.recycler_view.related_authors.RelatedAuthorsAdapter
+import com.example.pocketbook.screen.book_author.recycler_view.related_books.RelatedBooksAdapter
 import com.example.pocketbook.screen.main.MainActivity.Companion.DATA_FAIL
 import com.example.pocketbook.screen.main.MainActivity.Companion.LOAD_ERROR
+import com.example.pocketbook.screen.main.top.ImageListener
 import com.example.pocketbook.screen.main.top.ItemListener
 import com.example.pocketbook.screen.my_books.MyBooksFragment
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
@@ -24,16 +27,24 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class BookAuthorFragment : Fragment(), ItemListener<BookModel> {
+class BookAuthorFragment : Fragment(), ItemListener<BookModel>, ImageListener {
 
     companion object {
-        fun getInstance(): BookAuthorFragment {
-            return BookAuthorFragment()
+        const val BOOK_AUTHOR_ARG = "bookAuthor"
+
+        fun getInstance(bookAuthorName: String): BookAuthorFragment {
+            val arguments = Bundle()
+            val fragment = BookAuthorFragment()
+            arguments.putString(BOOK_AUTHOR_ARG, bookAuthorName)
+            fragment.arguments = arguments
+            return fragment
         }
     }
 
     private lateinit var binding: BookAuthorFragmentBinding
+    private val FAILED_TO_LOAD_RELATED_AUTHORS = "Failed to load related authors"
     private var authorNameFromArgument: String = ""
+    private var selectedAuthorBookStyle: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,12 +58,13 @@ class BookAuthorFragment : Fragment(), ItemListener<BookModel> {
         setClickListeners()
         loadAuthorData()
         getBookAuthorBooks()
+        loadRelatedAuthors()
         return view
     }
 
     override fun onResume() {
         super.onResume()
-        authorNameFromArgument = arguments?.getString(SELECTED_BOOK_AUTHOR_ARG).toString()
+        authorNameFromArgument = arguments?.getString(BOOK_AUTHOR_ARG).toString()
         binding.bookAuthorName.text = authorNameFromArgument
     }
 
@@ -89,6 +101,7 @@ class BookAuthorFragment : Fragment(), ItemListener<BookModel> {
         if (list != null) {
             for (i in list.indices) {
                 if (list[i].bookAuthor == authorNameFromArgument) {
+                    selectedAuthorBookStyle = list[i].bookAuthorStyle
                     binding.bookAuthorBiography.text = list[i].authorBiography
                     activity?.let {
                         Glide.with(it)
@@ -107,6 +120,7 @@ class BookAuthorFragment : Fragment(), ItemListener<BookModel> {
         }
     }
 
+    //TODO запрос не возвращает ответ с заданным параметром имени и фамиилл автора
     private fun getBookAuthorBooks() {
         NetworkClient.buildBookApiClient().getBookAuthor(authorNameFromArgument).enqueue(
             object : Callback<List<BookModel>> {
@@ -127,6 +141,7 @@ class BookAuthorFragment : Fragment(), ItemListener<BookModel> {
         )
     }
 
+    //TODO переделать метод
     private fun setRecyclerViewAdapter(response: Response<List<BookModel>>) {
         val linearLayoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
@@ -146,6 +161,42 @@ class BookAuthorFragment : Fragment(), ItemListener<BookModel> {
         binding.bookAuthorBooksNumber.text = sb.toString()
         val adapter = authorBooks.let { RelatedBooksAdapter(context, it, this) }
         binding.bookAuthorAllBooksRecyclerView.adapter = adapter
+    }
+
+    private fun loadRelatedAuthors() {
+        NetworkClient.buildBookAuthorApi().getBookAuthor().enqueue(
+            object : Callback<List<BookAuthorModel>> {
+                override fun onResponse(
+                    call: Call<List<BookAuthorModel>>,
+                    response: Response<List<BookAuthorModel>>
+                ) {
+                    if (response.isSuccessful && response.body() != null) {
+                        getRelatedAuthors(response)
+                    }
+                }
+
+                override fun onFailure(call: Call<List<BookAuthorModel>>, t: Throwable) {
+                    showToast(FAILED_TO_LOAD_RELATED_AUTHORS)
+                }
+
+            }
+        )
+    }
+
+    private fun getRelatedAuthors(response: Response<List<BookAuthorModel>>) {
+        val linearManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        binding.bookAuthorRelatedAuthorsRecyclerView.layoutManager = linearManager
+        val list = response.body()
+        val listOfRelatedAuthors: MutableList<BookAuthorModel> = mutableListOf()
+        if (list != null) {
+            for (i in list.indices) {
+                if (list[i].bookAuthorStyle == selectedAuthorBookStyle) {
+                    listOfRelatedAuthors.add(list[i])
+                }
+            }
+        }
+        val adapter = RelatedAuthorsAdapter(context, listOfRelatedAuthors, this)
+        binding.bookAuthorRelatedAuthorsRecyclerView.adapter = adapter
     }
 
     private fun changeFragment(fragment: Fragment) {
@@ -174,5 +225,9 @@ class BookAuthorFragment : Fragment(), ItemListener<BookModel> {
                 model.bookSeries
             )
         )
+    }
+
+    override fun imageClicked(model: BookAuthorModel) {
+        changeFragment(getInstance(model.bookAuthor))
     }
 }
