@@ -2,21 +2,28 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:backgroundTint="@color/black_haze">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/related_book_image"
-        android:layout_width="110dp"
-        android:layout_height="170dp"
-        android:layout_marginStart="@dimen/all_margin_10dp"
-        android:layout_marginTop="@dimen/related_book_margin_small_5_dp"
-        android:layout_marginEnd="@dimen/related_book_margin_small_5_dp"
-        android:background="@drawable/round_corners_10dp"
-        android:scaleType="centerCrop"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/related_book_card"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="120dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="@dimen/selected_book_margin_small_8_dp"
+        android:layout_marginEnd="@dimen/selected_book_margin_small_8_dp"
+        app:cardCornerRadius="@dimen/all_corner_radius_10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/related_book_image"
+            android:layout_width="120dp"
+            android:layout_height="180dp"
+            android:scaleType="centerCrop" />
+
+    </androidx.cardview.widget.CardView>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/related_book_series_tag"
@@ -38,9 +45,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        app:layout_constraintEnd_toEndOf="@+id/related_book_image"
-        app:layout_constraintStart_toStartOf="@+id/related_book_image"
-        app:layout_constraintTop_toBottomOf="@+id/related_book_image" />
+        app:layout_constraintEnd_toEndOf="@+id/related_book_card"
+        app:layout_constraintStart_toStartOf="@+id/related_book_card"
+        app:layout_constraintTop_toBottomOf="@+id/related_book_card" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/related_book_name"
@@ -48,9 +55,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/related_book_margin_small_5_dp"
-        app:layout_constraintEnd_toEndOf="@+id/related_book_image"
+        app:layout_constraintEnd_toEndOf="@+id/related_book_card"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/related_book_image"
+        app:layout_constraintStart_toStartOf="@+id/related_book_card"
         app:layout_constraintTop_toBottomOf="@+id/related_book_rating" />
 
     <androidx.appcompat.widget.AppCompatTextView

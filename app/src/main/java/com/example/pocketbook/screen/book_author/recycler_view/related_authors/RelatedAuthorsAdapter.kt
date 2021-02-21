@@ -23,13 +23,12 @@ class RelatedAuthorsAdapter(
     }
 
     override fun onBindViewHolder(holder: RelatedAuthorsHolder, position: Int) {
-        val model = listOfAuthors[position]
+        val model:BookAuthorModel = listOfAuthors[position]
         holder.bindImage()
         holder.binding.bookAuthorRelatedAuthorName.text = model.bookAuthor
         holder.binding.bookAuthorRelatedAuthorBooksCount.text = model.bookAuthorStyle
         if (context != null) {
             Glide.with(context).load(model.bookAuthorImageUrl)
-                .transform(RoundedCorners(20))
                 .into(holder.binding.bookAuthorRelatedBookImage)
         }
     }

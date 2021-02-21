@@ -53,6 +53,7 @@ class SearchScreenFragment : Fragment(), ItemListener<BooksDataClass> {
     ): View {
         binding = SearchScreenFragmentBinding.inflate(inflater, container, false)
         val view = binding.root
+       // getBooksCount()
         getBooksDataFromServer()
         createBooksData()
         createBooksCategoriesData()
@@ -155,6 +156,28 @@ class SearchScreenFragment : Fragment(), ItemListener<BooksDataClass> {
         val listOfCategories = listOf(response.body())
         for (i in listOfCategories) {
         }
+    }
+
+    private fun getBooksCount(){
+        NetworkClient.buildBookApiClient().getBooksCount().enqueue(
+            object : Callback<BookModel> {
+                override fun onResponse(
+                    call: Call<BookModel>,
+                    response: Response<BookModel>
+                ) {
+                    getCount(response)
+                }
+
+                override fun onFailure(call: Call<BookModel>, t: Throwable) {
+                    showMessage(DATA_FAIL)
+                }
+            }
+        )
+    }
+
+    private fun getCount(response: Response<BookModel>) {
+        val listOfCategories = listOf(response.body())
+        val count = listOfCategories.size
     }
 
     override fun itemClicked(model: BooksDataClass) {

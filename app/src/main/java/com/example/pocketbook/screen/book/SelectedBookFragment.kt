@@ -72,6 +72,9 @@ class SelectedBookFragment : Fragment(), ItemListener<BookModel> {
     }
 
     lateinit var binding: SelectedBookFragmentBinding
+    private var selectedBookSeries: String = ""
+    private var selectedBookStyle: String = ""
+    private var selectedBookName: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -174,17 +177,37 @@ class SelectedBookFragment : Fragment(), ItemListener<BookModel> {
         val linearLayoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.selectedBookRelatedSeriesRecyclerView.layoutManager = linearLayoutManager
+        val relatedBooksLayoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        binding.selectedBookRelatedBookRecyclerView.layoutManager = relatedBooksLayoutManager
         val list = response.body()
+        val relatedBooks: MutableList<BookModel> = mutableListOf()
         val bookSeries: MutableList<BookModel> = mutableListOf()
+        selectedBookSeries = arguments?.getString(SELECTED_BOOK_SERIES_ARG).toString()
+        selectedBookStyle = arguments?.getString(SELECTED_BOOK_STYLE_ARG).toString()
+        selectedBookName = arguments?.getString(SELECTED_BOOK_NAME_ARG).toString()
         if (list != null) {
             for (i in list.indices) {
-                if (list[i].bookSeries == arguments?.getString(SELECTED_BOOK_SERIES_ARG)) {
+                if (list[i].bookSeries == selectedBookSeries) {
                     bookSeries.add(list[i])
                 }
             }
+            for (i in list.indices) {
+                if (list[i].bookStyle == selectedBookStyle) {
+                    relatedBooks.add(list[i])
+                }
+            }
         }
-        val adapter = bookSeries.let { RelatedBooksAdapter(context, it, this) }
+        for (i in relatedBooks.indices) {
+            if (relatedBooks[i].bookName == selectedBookName) {
+                relatedBooks.removeAt(i)
+                break
+            }
+        }
+        val relatedBooksAdapter = RelatedBooksAdapter(context, relatedBooks, this)
+        val adapter = RelatedBooksAdapter(context, bookSeries, this)
         binding.selectedBookRelatedSeriesRecyclerView.adapter = adapter
+        binding.selectedBookRelatedBookRecyclerView.adapter = relatedBooksAdapter
     }
 
 

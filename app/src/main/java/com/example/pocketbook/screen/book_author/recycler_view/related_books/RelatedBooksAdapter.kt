@@ -37,7 +37,9 @@ class RelatedBooksAdapter(
                 .into(holder.binding.relatedBookImage)
         }
         holder.binding.relatedBookSeriesTag.text = model.seriesOrderTag
-        holder.binding.relatedBookSeriesTag.visibility = View.VISIBLE
+        if (holder.binding.relatedBookSeriesTag.text.isNotEmpty()){
+            holder.binding.relatedBookSeriesTag.visibility = View.VISIBLE
+        }
         holder.binding.relatedBookRating.numStars = model.bookRating
         holder.binding.relatedBookName.text = model.bookName
         holder.binding.relatedBookAuthor.text = model.bookAuthor

@@ -10,5 +10,9 @@ interface BookApi {
     fun getBooks(): Call<List<BookModel>>
 
     @GET("data/Book")
-    fun getBookAuthor(@Query("bookAuthor") author: String): Call<List<BookModel>>
+    fun getBookAuthor(@Query("bookAuthor") bookAuthor: String): Call<List<BookModel>>
+
+    @GET("data/Book??property=Count(id)")
+    fun getBooksCount(): Call<BookModel>
+
 }
