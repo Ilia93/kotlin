@@ -158,6 +158,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/all_margin_5dp"
                         android:layout_marginEnd="@dimen/all_margin_5dp"
+                        android:layout_marginBottom="@dimen/all_margin_10dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"

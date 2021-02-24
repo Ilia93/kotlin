@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PocketBook">
-        <activity android:name=".screen.splash.SplashScreen">
+        <activity android:name=".presentation.screen.splash.SplashScreen">
 
             <intent-filter>
 
@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".screen.main.MainActivity" />
-        <activity android:name=".screen.main.top.ScreenPage" />
+        <activity android:name=".presentation.screen.main.MainActivity" />
+        <activity android:name=".presentation.screen.main.top.ScreenPage" />
     </application>
 </manifest>
