@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -68,7 +67,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="10dp"
                 android:textColor="@color/white"
-                android:textSize="@dimen/text_size_all_small_12_sp"
+                android:textSize="@dimen/text_size_all_small_15_sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/selected_book_toolbar" />
 
@@ -89,7 +88,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="10dp"
-                android:text="Название книги"
                 android:textSize="@dimen/selected_book_text_size_big_24_sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/selected_book_status" />
@@ -100,9 +98,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="5dp"
-                android:text="Автор:"
                 android:textColor="@color/white"
-                android:textSize="@dimen/text_size_all_small_12_sp"
+                android:textSize="@dimen/text_size_all_small_15_sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/selected_book_name" />
 
@@ -114,7 +111,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="5dp"
                 android:clickable="true"
-                android:text="Имя автора"
+                android:focusable="true"
                 android:textSize="@dimen/selected_book_text_size_medium_18_sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/selected_book_author_tag" />
@@ -126,7 +123,7 @@
                 android:layout_marginStart="@dimen/all_margin_10dp"
                 android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.054"
+                app:layout_constraintHorizontal_bias="0.035"
                 app:layout_constraintStart_toEndOf="@+id/selected_book_image"
                 app:layout_constraintTop_toBottomOf="@+id/selected_book_toolbar_background">
 
@@ -160,11 +157,10 @@
                     android:id="@+id/selected_book_readers_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="читателей оценили"
-                    android:textSize="@dimen/text_size_all_small_12_sp"
+                    android:layout_marginTop="12dp"
+                    android:textSize="@dimen/text_size_all_small_15_sp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/selected_book_rating" />
 
@@ -173,7 +169,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="печатных страниц"
-                    android:textSize="@dimen/text_size_all_small_12_sp"
+                    android:textSize="@dimen/text_size_all_small_15_sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/selected_book_readers_number" />
 
@@ -182,7 +178,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0+"
-                    android:textSize="@dimen/text_size_all_small_12_sp"
+                    android:textSize="@dimen/text_size_all_small_15_sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/selected_book_pages_number" />
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -190,13 +186,13 @@
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/selected_book_subscribe_btn"
                 style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="81dp"
+                android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:background="@drawable/round_corners_10dp"
                 android:backgroundTint="@color/light_grey"
                 android:drawableStart="@drawable/ic_my_books_info_premium_24"
                 android:textAllCaps="false"
-                android:textSize="@dimen/text_size_all_small_12_sp"
+                android:textSize="@dimen/text_size_all_small_15_sp"
                 app:layout_constraintEnd_toEndOf="@+id/selected_book_image"
                 app:layout_constraintHorizontal_bias="0.506"
                 app:layout_constraintStart_toStartOf="@+id/selected_book_image"
@@ -235,10 +231,10 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/selected_book_add_premium_card"
                 android:layout_width="match_parent"
-                android:layout_height="90dp"
+                android:layout_height="wrap_content"
                 android:layout_margin="@dimen/all_margin_10dp"
-                app:cardCornerRadius="@dimen/all_corner_radius_10dp"
                 android:backgroundTint="@color/light_orange"
+                app:cardCornerRadius="@dimen/all_corner_radius_10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -246,18 +242,19 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="@dimen/all_margin_10dp">
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/appCompatButton"
                         style="@style/Widget.AppCompat.Button.Borderless"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:clickable="false"
                         android:drawableEnd="@drawable/ic_my_books_info_premium_24"
                         android:text="@string/selectedBook_premium_text"
                         android:textAlignment="viewStart"
                         android:textAllCaps="false"
-                        android:clickable="false"
                         android:textSize="@dimen/selected_book_text_size_medium_18_sp"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -267,9 +264,9 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:clickable="false"
                         android:text="@string/selectedBook_premium_free_period"
                         android:textColor="@color/black"
-                        android:clickable="false"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.066"
                         app:layout_constraintStart_toStartOf="parent"
@@ -373,7 +370,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/appCompatTextView5" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:visibility="gone"
                 android:id="@+id/appCompatTextView8"
                 style="@style/TextView.Black"
                 android:layout_width="wrap_content"
@@ -382,6 +378,7 @@
                 android:layout_marginTop="@dimen/selected_book_margin_small_8_dp"
                 android:text="@string/selectedBook_related_series"
                 android:textSize="@dimen/book_author_text_size_normal_18_sp"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -389,12 +386,12 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/selected_book_series_tag"
-                android:visibility="gone"
                 style="@style/TextView.Brown"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/all_margin_10dp"
                 android:layout_marginTop="@dimen/selected_book_margin_small_8_dp"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -402,14 +399,14 @@
 
 
             <androidx.recyclerview.widget.RecyclerView
-                android:visibility="gone"
                 android:id="@+id/selected_book_related_series_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/selected_book_margin_small_8_dp"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginStart="@dimen/all_margin_10dp"
+                android:layout_marginTop="@dimen/selected_book_margin_small_8_dp"
                 android:layout_marginEnd="@dimen/all_margin_10dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/selected_book_series_tag" />

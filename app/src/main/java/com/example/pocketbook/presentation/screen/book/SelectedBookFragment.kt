@@ -23,6 +23,7 @@ import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.StringBuilder
 
 class SelectedBookFragment : Fragment(), ItemListener<BookModel> {
 
@@ -39,7 +40,8 @@ class SelectedBookFragment : Fragment(), ItemListener<BookModel> {
             bookIsFinished: Boolean,
             bookLanguage: String,
             bookStyle: String,
-            bookSeries: String?
+            bookSeries: String?,
+            marksCount: String
         ): SelectedBookFragment {
             val fragmentArguments = Bundle()
             val fragment =
@@ -88,6 +90,7 @@ class SelectedBookFragment : Fragment(), ItemListener<BookModel> {
                 SELECTED_BOOK_SERIES_ARG,
                 bookSeries
             )
+            fragmentArguments.putString(SELECTED_BOOK_MARKS_COUNT, marksCount)
             fragment.arguments = fragmentArguments
             return fragment
         }
@@ -103,6 +106,7 @@ class SelectedBookFragment : Fragment(), ItemListener<BookModel> {
         const val SELECTED_BOOK_LANGUAGE_ARG = "bookLanguage"
         const val SELECTED_BOOK_STYLE_ARG = "bookStyle"
         const val SELECTED_BOOK_SERIES_ARG = "bookSeries"
+        const val SELECTED_BOOK_MARKS_COUNT = "bookMarks"
     }
 
     lateinit var binding: SelectedBookFragmentBinding
@@ -155,6 +159,7 @@ class SelectedBookFragment : Fragment(), ItemListener<BookModel> {
             if (rating != null) {
                 binding.selectedBookRating.rating = rating
             }
+            setRating()
             binding.selectedBookAgeLimit.text =
                 arguments?.getString(SELECTED_BOOK_AGE_LIMIT_ARG)
             binding.selectedBookSubscribeBtn.text =
@@ -183,6 +188,13 @@ class SelectedBookFragment : Fragment(), ItemListener<BookModel> {
         }
     }
 
+    private fun setRating(){
+        val builder = StringBuilder()
+        val result = arguments?.getString(SELECTED_BOOK_MARKS_COUNT)
+        builder.append(result).append("").append("читателей оценили")
+        binding.selectedBookReadersNumber.text = builder.toString()
+    }
+
     private fun setOnClickListeners() {
         binding.selectedBookSubscribeBtn.setOnClickListener {
             changeFragment(SubscribeFragment.getInstance())
@@ -197,7 +209,12 @@ class SelectedBookFragment : Fragment(), ItemListener<BookModel> {
         binding.selectedBookAddPremiumCard.setOnClickListener {
             changeFragment(SubscribeFragment.getInstance())
         }
+        binding.selectedBookDefaultRating.setOnRatingBarChangeListener { ratingBar, rating, fromUser ->
+            showToast(rating.toString())
+        }
+
     }
+
 
     private fun loadBookSeries() {
         NetworkClient.buildBookApiClient()
@@ -290,6 +307,7 @@ class SelectedBookFragment : Fragment(), ItemListener<BookModel> {
                 model.bookLanguage,
                 model.bookStyle,
                 model.bookSeries,
+                model.marksCount
             )
         )
     }

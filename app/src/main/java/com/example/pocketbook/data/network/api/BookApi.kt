@@ -11,8 +11,8 @@ interface BookApi {
     @GET("data/Book")
     fun getBookAuthor(@Query("bookAuthor") bookAuthor: String): Call<List<BookModel>>
 
-    @GET("data/Book??property=Count(id)")
-    fun getBooksCount(): Call<BookModel>
+    @GET("data/Book/count")
+    fun getBooksCount(): Call<String>
 
     @PUT("data/Book/{objectId}")
     fun updateBook(@Path("objectId") objectId: String, @Body model: BookModel): Call<BookModel>

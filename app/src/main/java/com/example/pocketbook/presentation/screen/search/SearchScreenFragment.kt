@@ -43,6 +43,7 @@ class SearchScreenFragment : Fragment(), ItemListener<BooksDataClass> {
 
     private val KEY_TAG = "TAG"
     private lateinit var binding: SearchScreenFragmentBinding
+    private var booksCount: String = ""
     private var listOfBooks = mutableListOf<BooksDataClass>()
     private var listOfBooksCategories = mutableListOf<BooksDataClass>()
 
@@ -53,18 +54,22 @@ class SearchScreenFragment : Fragment(), ItemListener<BooksDataClass> {
     ): View {
         binding = SearchScreenFragmentBinding.inflate(inflater, container, false)
         val view = binding.root
-        // getBooksCount()
+        getBooksCount()
         getBooksDataFromServer()
-        createBooksData()
         createBooksCategoriesData()
         setBooksRecyclerView()
         setBooksCategoriesRecyclerView()
         return view
     }
 
-    private fun createBooksData() {
+    private fun createBooksData(count: String) {
         addListOfBooksItem(0, 0, R.drawable.ic_search_screen_headphones_24, "Аудиокниги")
-        addListOfBooksItem(1, 0, R.drawable.ic_search_screen_free_books_24, "Бесплатные книги")
+        addListOfBooksItem(
+            1,
+            count.toInt(),
+            R.drawable.ic_search_screen_free_books_24,
+            "Бесплатные книги"
+        )
         addListOfBooksItem(2, 0, R.drawable.ic_search_screen_podcast_24, "Подкасты")
         addListOfBooksItem(3, 0, R.drawable.ic_my_books_read_24, "Читай и слушай")
     }
@@ -160,24 +165,27 @@ class SearchScreenFragment : Fragment(), ItemListener<BooksDataClass> {
 
     private fun getBooksCount() {
         NetworkClient.buildBookApiClient().getBooksCount().enqueue(
-            object : Callback<BookModel> {
+            object : Callback<String> {
                 override fun onResponse(
-                    call: Call<BookModel>,
-                    response: Response<BookModel>
+                    call: Call<String>,
+                    response: Response<String>
                 ) {
-                    getCount(response)
+                    if (response.isSuccessful && response.body() != null) {
+                        getCount(response)
+                        showMessage("Ok")
+                    }
                 }
 
-                override fun onFailure(call: Call<BookModel>, t: Throwable) {
+                override fun onFailure(call: Call<String>, t: Throwable) {
                     showMessage(DATA_FAIL)
                 }
             }
         )
     }
 
-    private fun getCount(response: Response<BookModel>) {
-        val listOfCategories = listOf(response.body())
-        val count = listOfCategories.size
+    private fun getCount(response: Response<String>) {
+        booksCount = response.body().toString()
+        createBooksData(booksCount)
     }
 
     override fun itemClicked(model: BooksDataClass) {

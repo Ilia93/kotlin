@@ -226,7 +226,8 @@ class BookAuthorFragment : Fragment(), ItemListener<BookModel>, ImageListener {
                 model.isBookFinished,
                 model.bookLanguage,
                 model.bookStyle,
-                model.bookSeries
+                model.bookSeries,
+                model.marksCount
             )
         )
     }

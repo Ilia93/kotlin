@@ -27,7 +27,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/search_screen_text_size_15sp"
+                    android:textSize="@dimen/text_size_all_normal_17_sp"
                     android:textStyle="bold"
                     app:layout_collapseMode="parallax" />
 
@@ -36,7 +36,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-                    android:textSize="10sp"
+                    android:textSize="@dimen/text_size_all_small_15_sp"
                     app:layout_collapseMode="parallax" />
             </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.appcompat.widget.Toolbar>

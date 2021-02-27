@@ -1,12 +1,11 @@
 package com.example.pocketbook.presentation.screen.main.tabs
 
-import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 
-class PagesAdapter(fragmentManager: FragmentManager?, context: Context?) :
-    FragmentPagerAdapter(fragmentManager!!, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+class PagesAdapter(fragmentManager: FragmentManager) :
+    FragmentPagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
     override fun getCount(): Int {
         return 2
     }

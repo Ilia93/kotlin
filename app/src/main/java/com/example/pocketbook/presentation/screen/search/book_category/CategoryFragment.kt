@@ -97,7 +97,8 @@ class CategoryFragment : Fragment(), ItemListener<BookModel> {
                 model.isBookFinished,
                 model.bookLanguage,
                 model.bookStyle,
-                model.bookSeries
+                model.bookSeries,
+                model.marksCount
             )
         )
     }

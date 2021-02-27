@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.pocketbook.databinding.AudioBookTabFragmentBinding
+import com.example.pocketbook.databinding.MainAudioBookTabFragmentBinding
 
 class AudioBookPageFragment : Fragment() {
     companion object {
@@ -19,7 +19,7 @@ class AudioBookPageFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = AudioBookTabFragmentBinding.inflate(layoutInflater, container, false)
+        val binding = MainAudioBookTabFragmentBinding.inflate(layoutInflater, container, false)
         val view = binding.root
         return view
     }

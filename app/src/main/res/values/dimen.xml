@@ -5,7 +5,8 @@
     <dimen name="all_margin_5dp">5dp</dimen>
     <dimen name="all_margin_20dp">20dp</dimen>
     <dimen name="all_corner_radius_10dp">10dp</dimen>
-    <dimen name="text_size_all_small_12_sp">12sp</dimen>
+    <dimen name="text_size_all_small_15_sp">15sp</dimen>
+    <dimen name="text_size_all_normal_17_sp">17sp</dimen>
     <dimen name="card_text_size_10sp">10sp</dimen>
     <dimen name="my_shelf_ready_toolbar_margin_20dp">20dp</dimen>
     <dimen name="my_shelf_padding_btn_5dp">5dp</dimen>

@@ -29,10 +29,11 @@
 
     <androidx.core.widget.ContentLoadingProgressBar
         android:id="@+id/splash_screen_progress_bar"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:progressTint="@color/grey"
+        android:progressBackgroundTint="@color/light_orange"
         android:layout_marginBottom="48dp"
-        android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

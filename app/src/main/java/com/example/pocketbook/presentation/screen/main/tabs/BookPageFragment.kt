@@ -5,7 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.pocketbook.databinding.MainBooksTabItemTypeOneBinding
+import com.example.pocketbook.databinding.MainBooksTabFragmentBinding
+import com.example.pocketbook.databinding.MainBooksTabItemCollectionTypeBinding
 
 class BookPageFragment : Fragment() {
     companion object {
@@ -19,7 +20,8 @@ class BookPageFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = MainBooksTabItemTypeOneBinding.inflate(layoutInflater, container, false)
+        val binding =
+            MainBooksTabFragmentBinding.inflate(layoutInflater, container, false)
         val view = binding.root
         return view
     }

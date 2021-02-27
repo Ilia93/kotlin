@@ -31,16 +31,25 @@ class MainActivity : AppCompatActivity() {
         if (bundle == null) {
             changeFragment(MainFragment.getInstance())
         }
-        bottomNavigation = binding.bottomNavigationBar
-        binding.bottomNavigationBar.setOnNavigationItemSelectedListener(
-            onNavigationItemSelectedListener
-        )
+        setBottomNavigationListener()
+        setBottomNavigationSelectedItem()
     }
 
     private fun changeFragment(fragment: Fragment) {
         val replace: FragmentTransaction =
             fragmentManager.beginTransaction().replace(R.id.main_frame, fragment)
         replace.addToBackStack(null).commit()
+    }
+
+    private fun setBottomNavigationListener() {
+        bottomNavigation = binding.bottomNavigationBar
+        binding.bottomNavigationBar.setOnNavigationItemSelectedListener(
+            onNavigationItemSelectedListener
+        )
+    }
+
+    private fun setBottomNavigationSelectedItem() {
+        binding.bottomNavigationBar.selectedItemId = R.id.bottom_nav_home
     }
 
     private val onNavigationItemSelectedListener =

@@ -56,7 +56,7 @@ class MainFragment : Fragment(), ItemListener<ImageCollectionModel> {
 
     private fun setViewPage() {
         val mainViewPager: ViewPager = binding.mainFragmentViewPager
-        val pagesAdapter = PagesAdapter(fragmentManager, context)
+        val pagesAdapter = fragmentManager?.let { PagesAdapter(it) }
         mainViewPager.adapter = pagesAdapter
         binding.mainFragmentTabLayout.setupWithViewPager(mainViewPager)
     }

@@ -4,12 +4,13 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.pocketbook.R
 import com.example.pocketbook.data.network.model.BookModel
 import com.example.pocketbook.presentation.screen.main.top.ItemListener
 
 class MyBooksInfoAdapter(
-    private val context: Context,
+    private val context: Context?,
     private val listener: ItemListener<BookModel>,
     private val listOfItems: List<BookModel>
 ) : RecyclerView.Adapter<MyBooksInfoHolder>() {
@@ -27,6 +28,9 @@ class MyBooksInfoAdapter(
         holder.binding.myBooksInfoBookAuthor.text = model.bookAuthor
         holder.binding.myBooksBookInfoRatingBtn.text = model.bookRating.toString()
         holder.binding.myBooksBookInfoSubscribeBtn.text = model.typeOfBookSubscribe
+        if (context != null) {
+            Glide.with(context).load(model.imageUrl).into(holder.binding.myBooksInfoItemImage)
+        }
     }
 
     override fun getItemCount(): Int {

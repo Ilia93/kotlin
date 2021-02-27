@@ -41,5 +41,9 @@ data class BookModel(
     @SerializedName("followers")
     val readersCount: Int,
     @SerializedName("subscribe_type")
-    val typeOfBookSubscribe: String
+    val typeOfBookSubscribe: String,
+    @SerializedName("isRated")
+    val isRated: Boolean,
+    @SerializedName("marksCount")
+    val marksCount: String
 )

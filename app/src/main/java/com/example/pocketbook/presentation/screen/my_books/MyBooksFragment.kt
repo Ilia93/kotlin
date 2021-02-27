@@ -45,6 +45,7 @@ class MyBooksFragment : Fragment(), ItemListener<BookModel>,
     private val READ = "Читаю"
     private val WANT_TO_READ = "Хочу прочитать"
     private val NO_BOOKS_AVAILABLE = "Нет книг"
+    private val ALL_USER_BOOKS = "Все книги и аудиокниги"
     private var menuMutableList: MutableList<BooksStatusDataClass> = mutableListOf()
     private lateinit var binding: MyBooksFragmentBinding
 
@@ -57,7 +58,81 @@ class MyBooksFragment : Fragment(), ItemListener<BookModel>,
         val view = binding.root
         setClickListeners()
         setBooksStatusRecyclerView()
+        getAllUserBooksCount()
         return view
+    }
+
+    private fun setClickListeners() {
+        binding.myBooksAvailableOffline.setOnClickListener {
+            changeFragment(
+                MyBooksInfoFragment.getInstance(),
+                R.id.main_frame,
+                OFFLINE,
+                binding.myBooksOfflineCount.text as String
+            )
+        }
+        binding.myBooksAllUserBooks.setOnClickListener {
+            changeFragment(
+                MyBooksInfoFragment.getInstance(),
+                R.id.main_frame,
+                ALL_USER_BOOKS,
+                binding.myBooksAllUserBooks.text.toString()
+            )
+        }
+    }
+
+    private fun changeFragment(fragment: Fragment, frame: Int, title: String?, subTitle: String?) {
+        val arguments = Bundle()
+        arguments.putString(TITLE_STRING_KEY, title)
+        if (subTitle.equals("0")) {
+            arguments.putString(SUB_TITLE_STRING_KEY, NO_BOOKS_AVAILABLE)
+        } else {
+            arguments.putString(SUB_TITLE_STRING_KEY, subTitle)
+        }
+        fragment.arguments = arguments
+        activity?.supportFragmentManager?.beginTransaction()?.replace(frame, fragment)
+            ?.commit()
+    }
+
+    private fun setBooksStatusRecyclerView() {
+        val linearManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        binding.myBooksBooksStatusRecyclerView.layoutManager = linearManager
+        val adapter = BooksStatusAdapter(context, this, initializeBooksStatus())
+        val itemDecoration = DividerItemDecoration(context, RecyclerView.VERTICAL)
+        ResourcesCompat.getDrawable(resources, R.drawable.recycler_view_divider, null)?.let {
+            itemDecoration.setDrawable(
+                it
+            )
+        }
+        binding.myBooksBooksStatusRecyclerView.addItemDecoration(itemDecoration)
+        binding.myBooksBooksStatusRecyclerView.adapter = adapter
+    }
+
+    private fun getAllUserBooksCount() {
+        NetworkClient.buildBookApiClient().getBooksCount().enqueue(
+            object : Callback<String> {
+                override fun onResponse(
+                    call: Call<String>,
+                    response: Response<String>
+                ) {
+                    if (response.isSuccessful && response.body() != null) {
+                        getCount(response)
+                    }
+                }
+
+                override fun onFailure(call: Call<String>, t: Throwable) {
+                    showMessage(DATA_FAIL)
+                }
+            }
+        )
+    }
+
+    private fun getCount(response: Response<String>) {
+        val builder = StringBuilder()
+        val count = response.body()
+        builder.append("Все ").append(count)
+        binding.myBooksAllUserBooks.text = builder.toString()
+
     }
 
     override fun onResume() {
@@ -69,6 +144,14 @@ class MyBooksFragment : Fragment(), ItemListener<BookModel>,
             changeShelfFragment(DefaultShelfFragment.getInstance())
         }
         showBooks()
+
+    }
+
+    private fun changeShelfFragment(fragment: Fragment) {
+        fragmentManager
+            ?.beginTransaction()
+            ?.replace(R.id.my_books_shelves_frame, fragment)
+            ?.commit()
     }
 
     private fun showBooks() {
@@ -101,51 +184,6 @@ class MyBooksFragment : Fragment(), ItemListener<BookModel>,
         binding.myBooksTopRecyclerView.adapter = adapter
 
     }
-
-    private fun setClickListeners() {
-        binding.myBooksAvailableOffline.setOnClickListener {
-            changeFragment(
-                MyBooksInfoFragment.getInstance(),
-                R.id.main_frame,
-                OFFLINE,
-                binding.myBooksOfflineCount.text as String
-            )
-        }
-    }
-
-    private fun changeShelfFragment(fragment: Fragment) {
-        fragmentManager
-            ?.beginTransaction()
-            ?.replace(R.id.my_books_shelves_frame, fragment)
-            ?.commit()
-    }
-
-    private fun changeFragment(fragment: Fragment, frame: Int, title: String?, subTitle: String?) {
-        val arguments = Bundle()
-        arguments.putString(TITLE_STRING_KEY, title)
-        if (subTitle.equals("0")) {
-            arguments.putString(SUB_TITLE_STRING_KEY, NO_BOOKS_AVAILABLE)
-        } else {
-            arguments.putString(SUB_TITLE_STRING_KEY, subTitle)
-        }
-        activity?.supportFragmentManager?.beginTransaction()?.replace(frame, fragment)
-            ?.addToBackStack("selected")?.commit()
-    }
-
-    private fun setBooksStatusRecyclerView() {
-        val linearManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        binding.myBooksBooksStatusRecyclerView.layoutManager = linearManager
-        val adapter = BooksStatusAdapter(context, this, initializeBooksStatus())
-        val itemDecoration = DividerItemDecoration(context, RecyclerView.VERTICAL)
-        ResourcesCompat.getDrawable(resources, R.drawable.recycler_view_divider, null)?.let {
-            itemDecoration.setDrawable(
-                it
-            )
-        }
-        binding.myBooksBooksStatusRecyclerView.addItemDecoration(itemDecoration)
-        binding.myBooksBooksStatusRecyclerView.adapter = adapter
-    }
-
 
     private fun initializeBooksStatus(): MutableList<BooksStatusDataClass> {
         menuMutableList.add(
@@ -195,6 +233,7 @@ class MyBooksFragment : Fragment(), ItemListener<BookModel>,
                     model.bookLanguage,
                     model.bookStyle,
                     model.bookSeries,
+                    model.marksCount
                 )
             )
         fragmentTransaction?.setTransition(TRANSIT_FRAGMENT_OPEN)
@@ -208,5 +247,9 @@ class MyBooksFragment : Fragment(), ItemListener<BookModel>,
             model.statusText,
             model.booksStatusCount.toString()
         )
+    }
+
+    private fun showMessage(message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 }
