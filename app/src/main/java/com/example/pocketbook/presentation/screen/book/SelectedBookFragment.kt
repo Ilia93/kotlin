@@ -10,8 +10,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.pocketbook.R
 import com.example.pocketbook.data.NetworkClient
-import com.example.pocketbook.data.network.model.BookModel
+import com.example.pocketbook.data.network.model.book_model.BookModel
+import com.example.pocketbook.data.network.model.book_model.BookRating
 import com.example.pocketbook.databinding.SelectedBookFragmentBinding
+import com.example.pocketbook.presentation.App
 import com.example.pocketbook.presentation.screen.book_author.BookAuthorFragment
 import com.example.pocketbook.presentation.screen.book_author.recycler_view.related_books.RelatedBooksAdapter
 import com.example.pocketbook.presentation.screen.main.MainActivity.Companion.LOAD_ERROR
@@ -23,7 +25,6 @@ import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.lang.StringBuilder
 
 class SelectedBookFragment : Fragment(), ItemListener<BookModel> {
 
@@ -41,56 +42,28 @@ class SelectedBookFragment : Fragment(), ItemListener<BookModel> {
             bookLanguage: String,
             bookStyle: String,
             bookSeries: String?,
-            marksCount: String
+            marksCount: Int,
+            objectId: String,
+            marksSum: Int,
+            isRated: Boolean
         ): SelectedBookFragment {
+            val fragment = SelectedBookFragment()
             val fragmentArguments = Bundle()
-            val fragment =
-                SelectedBookFragment()
-            fragmentArguments.putInt(
-                SELECTED_BOOK_RATING_ARG,
-                bookRating
-            )
-            fragmentArguments.putString(
-                SELECTED_BOOK_URL_ARG,
-                bookUrl
-            )
-            fragmentArguments.putString(
-                SELECTED_BOOK_NAME_ARG,
-                bookName
-            )
-            fragmentArguments.putString(
-                SELECTED_BOOK_AUTHOR_ARG,
-                bookAuthor
-            )
-            fragmentArguments.putString(
-                SELECTED_BOOK_DESCRIPTION_ARG,
-                bookDescription
-            )
-            fragmentArguments.putString(
-                SELECTED_BOOK_AGE_LIMIT_ARG,
-                bookAgeLimit
-            )
-            fragmentArguments.putString(
-                SELECTED_BOOK_SUBSCRIBE_ARG,
-                bookSubscribeType
-            )
-            fragmentArguments.putBoolean(
-                SELECTED_BOOK_IS_FINISHED_ARG,
-                bookIsFinished
-            )
-            fragmentArguments.putString(
-                SELECTED_BOOK_LANGUAGE_ARG,
-                bookLanguage
-            )
-            fragmentArguments.putString(
-                SELECTED_BOOK_STYLE_ARG,
-                bookStyle
-            )
-            fragmentArguments.putString(
-                SELECTED_BOOK_SERIES_ARG,
-                bookSeries
-            )
-            fragmentArguments.putString(SELECTED_BOOK_MARKS_COUNT, marksCount)
+            fragmentArguments.putInt(SELECTED_BOOK_RATING_ARG, bookRating)
+            fragmentArguments.putString(SELECTED_BOOK_URL_ARG, bookUrl)
+            fragmentArguments.putString(SELECTED_BOOK_NAME_ARG, bookName)
+            fragmentArguments.putString(SELECTED_BOOK_AUTHOR_ARG, bookAuthor)
+            fragmentArguments.putString(SELECTED_BOOK_DESCRIPTION_ARG, bookDescription)
+            fragmentArguments.putString(SELECTED_BOOK_AGE_LIMIT_ARG, bookAgeLimit)
+            fragmentArguments.putString(SELECTED_BOOK_SUBSCRIBE_ARG, bookSubscribeType)
+            fragmentArguments.putBoolean(SELECTED_BOOK_IS_FINISHED_ARG, bookIsFinished)
+            fragmentArguments.putString(SELECTED_BOOK_LANGUAGE_ARG, bookLanguage)
+            fragmentArguments.putString(SELECTED_BOOK_STYLE_ARG, bookStyle)
+            fragmentArguments.putString(SELECTED_BOOK_SERIES_ARG, bookSeries)
+            fragmentArguments.putInt(SELECTED_BOOK_MARKS_COUNT, marksCount)
+            fragmentArguments.putString(SELECTED_BOOK_OBJECT_ID, objectId)
+            fragmentArguments.putInt(SELECTED_BOOK_MARKS_SUM, marksSum)
+            fragmentArguments.putBoolean(SELECTED_BOOK_IS_RATED, isRated)
             fragment.arguments = fragmentArguments
             return fragment
         }
@@ -107,12 +80,29 @@ class SelectedBookFragment : Fragment(), ItemListener<BookModel> {
         const val SELECTED_BOOK_STYLE_ARG = "bookStyle"
         const val SELECTED_BOOK_SERIES_ARG = "bookSeries"
         const val SELECTED_BOOK_MARKS_COUNT = "bookMarks"
+        const val SELECTED_BOOK_IS_RATED = "bookIsRated"
+        const val SELECTED_BOOK_MARKS_SUM = "bookMarksSum"
+        const val SELECTED_BOOK_OBJECT_ID = "objectId"
     }
 
     lateinit var binding: SelectedBookFragmentBinding
-    private var selectedBookSeries: String = ""
-    private var selectedBookStyle: String = ""
-    private var selectedBookName: String = ""
+    private var selectedBookSeries = ""
+    private var selectedBookStyle = ""
+    private var selectedBookName = ""
+    private var bookUrl: String? = ""
+    private var isFinishedFlag: Boolean? = false
+    private var bookName: String? = ""
+    private var bookAuthor: String? = ""
+    private var bookMarkSum: Int = 0
+    private var bookMarkCount: Int = 0
+    private var isRated: Boolean = false
+    private var bookRating = 0
+    private var ageLimit = " "
+    private var bookSubscribe = " "
+    private var bookAnnotation = " "
+    private var bookStyle = " "
+    private var bookLanguage = " "
+    private var bookSeries: String = " "
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -125,74 +115,90 @@ class SelectedBookFragment : Fragment(), ItemListener<BookModel> {
         return binding.root
     }
 
-    //TODO переделать метод, очень большой
     override fun onResume() {
         super.onResume()
-        if (arguments?.getString(SELECTED_BOOK_URL_ARG) != null) {
-            val bookUrl =
-                arguments?.getString(SELECTED_BOOK_URL_ARG)
-            val isFinishedFlag =
-                arguments?.getBoolean(SELECTED_BOOK_IS_FINISHED_ARG)
-            activity?.let {
-                Glide.with(it)
-                    .load(bookUrl)
-                    .transform(RoundedCornersTransformation(10, 10))
-                    .into(binding.selectedBookImage)
-            }
+        initializeFields()
+        loadImages(bookUrl)
+        setBookFields()
+        setReaders()
+        setBookStatus()
+        setVisibility()
+    }
 
-            activity?.let {
-                Glide.with(it)
-                    .load(bookUrl)
-                    .transform(BlurTransformation(10))
-                    .into(binding.selectedBookToolbarBackground)
-            }
-            binding.selectedBookName.text =
-                arguments?.getString(SELECTED_BOOK_NAME_ARG)
-            binding.selectedBookAuthor.text =
-                arguments?.getString(SELECTED_BOOK_AUTHOR_ARG)
-            binding.selectedBookRatingMark.text =
-                arguments?.getInt(SELECTED_BOOK_RATING_ARG)
-                    .toString()
-            val rating: Float? =
-                arguments?.getInt(SELECTED_BOOK_RATING_ARG)
-                    ?.toFloat()
-            if (rating != null) {
-                binding.selectedBookRating.rating = rating
-            }
-            setRating()
-            binding.selectedBookAgeLimit.text =
-                arguments?.getString(SELECTED_BOOK_AGE_LIMIT_ARG)
-            binding.selectedBookSubscribeBtn.text =
-                arguments?.getString(SELECTED_BOOK_SUBSCRIBE_ARG)
-            if (isFinishedFlag == true) {
-                binding.selectedBookStatus.text =
-                    resources.getString(R.string.selectedBook_finished_read_status)
-            } else if (isFinishedFlag == false) {
-                binding.selectedBookStatus.text =
-                    resources.getString(R.string.selectedBook_read_status)
-            }
-            binding.selectedBookAnnotation.text =
-                arguments?.getString(SELECTED_BOOK_DESCRIPTION_ARG)
-            binding.selectedBookStyleTag.text =
-                arguments?.getString(SELECTED_BOOK_STYLE_ARG)
-            binding.selectedBookStyleTag.visibility = View.VISIBLE
-            binding.selectedBookLanguage.text =
-                arguments?.getString(SELECTED_BOOK_LANGUAGE_ARG)
-            if (arguments?.getString(SELECTED_BOOK_SERIES_ARG) != null) {
-                binding.selectedBookSeriesTag.text =
-                    arguments?.getString(SELECTED_BOOK_SERIES_ARG)
-                binding.selectedBookSeriesTag.visibility = View.VISIBLE
-                binding.appCompatTextView8.visibility = View.VISIBLE
-                binding.selectedBookRelatedSeriesRecyclerView.visibility = View.VISIBLE
-            }
+    private fun getArgument(argumentKey: String): Any? {
+        return arguments?.get(argumentKey)
+    }
+
+    private fun setBookFields() {
+        binding.selectedBookName.text = bookName
+        binding.selectedBookAuthor.text = bookAuthor
+        binding.selectedBookRatingMark.text = bookRating.toString()
+        binding.selectedBookRating.rating = bookRating.toFloat()
+        binding.selectedBookAgeLimit.text = ageLimit
+        binding.selectedBookSubscribeBtn.text = bookSubscribe
+        binding.selectedBookAnnotation.text = bookAnnotation
+        binding.selectedBookStyleTag.text = bookStyle
+        binding.selectedBookLanguage.text = bookLanguage
+        binding.selectedBookSeriesTag.text = bookSeries
+    }
+
+    private fun initializeFields() {
+        bookUrl = getArgument(SELECTED_BOOK_URL_ARG) as String?
+        isFinishedFlag = getArgument(SELECTED_BOOK_IS_FINISHED_ARG) as Boolean?
+        bookName = getArgument(SELECTED_BOOK_NAME_ARG) as String?
+        bookAuthor = getArgument(SELECTED_BOOK_AUTHOR_ARG) as String?
+        bookRating = getArgument(SELECTED_BOOK_RATING_ARG) as Int
+        bookMarkSum = getArgument(SELECTED_BOOK_MARKS_SUM) as Int
+        bookMarkCount = getArgument(SELECTED_BOOK_MARKS_COUNT) as Int
+        ageLimit = getArgument(SELECTED_BOOK_AGE_LIMIT_ARG) as String
+        bookSubscribe = getArgument(SELECTED_BOOK_SUBSCRIBE_ARG) as String
+        isRated = getArgument(SELECTED_BOOK_IS_RATED) as Boolean
+        bookAnnotation = getArgument(SELECTED_BOOK_DESCRIPTION_ARG) as String
+        bookStyle = getArgument(SELECTED_BOOK_STYLE_ARG) as String
+        bookLanguage = getArgument(SELECTED_BOOK_LANGUAGE_ARG) as String
+        if (getArgument(SELECTED_BOOK_SERIES_ARG) != null){
+            bookSeries = getArgument(SELECTED_BOOK_SERIES_ARG) as String
         }
     }
 
-    private fun setRating(){
+    private fun loadImages(bookUrl: String?) {
+        activity?.let {
+            Glide.with(it)
+                .load(bookUrl)
+                .transform(RoundedCornersTransformation(10, 10))
+                .into(binding.selectedBookImage)
+        }
+
+        activity?.let {
+            Glide.with(it)
+                .load(bookUrl)
+                .transform(BlurTransformation(10))
+                .into(binding.selectedBookToolbarBackground)
+        }
+    }
+
+    private fun setReaders() {
         val builder = StringBuilder()
-        val result = arguments?.getString(SELECTED_BOOK_MARKS_COUNT)
-        builder.append(result).append("").append("читателей оценили")
+        val result = arguments?.getInt(SELECTED_BOOK_MARKS_COUNT)
+        builder.append(result).append(" ").append("читателей оценили")
         binding.selectedBookReadersNumber.text = builder.toString()
+    }
+
+    private fun setBookStatus() {
+        if (isFinishedFlag == true) {
+            binding.selectedBookStatus.text =
+                resources.getString(R.string.selectedBook_finished_read_status)
+        } else if (isFinishedFlag == false) {
+            binding.selectedBookStatus.text =
+                resources.getString(R.string.selectedBook_read_status)
+        }
+    }
+
+    private fun setVisibility() {
+        binding.selectedBookStyleTag.visibility = View.VISIBLE
+        binding.selectedBookSeriesTag.visibility = View.VISIBLE
+        binding.appCompatTextView8.visibility = View.VISIBLE
+        binding.selectedBookRelatedSeriesRecyclerView.visibility = View.VISIBLE
     }
 
     private fun setOnClickListeners() {
@@ -210,11 +216,29 @@ class SelectedBookFragment : Fragment(), ItemListener<BookModel> {
             changeFragment(SubscribeFragment.getInstance())
         }
         binding.selectedBookDefaultRating.setOnRatingBarChangeListener { ratingBar, rating, fromUser ->
-            showToast(rating.toString())
+            showToast("$rating")
+            doRatingLogic(rating)
         }
-
     }
 
+    private fun doRatingLogic(rating: Float) {
+        val objectId: String = arguments?.getString(SELECTED_BOOK_OBJECT_ID).toString()
+        isRated = true
+        bookMarkCount++
+        val bookMarkSumTemporary: Int = bookMarkSum + rating.toInt()
+        val bookRatingTemporary: Int = bookMarkSumTemporary / bookMarkCount
+        val model = BookRating(
+            isRated,
+            bookMarkCount,
+            bookMarkSumTemporary,
+            bookRatingTemporary,
+            objectId
+        )
+        /* NetworkClient.buildBookApiClient().updateBookRating(
+             objectId,
+             model
+         ).enqueue(object : Callback<BookRating>)*/
+    }
 
     private fun loadBookSeries() {
         NetworkClient.buildBookApiClient()
@@ -241,9 +265,8 @@ class SelectedBookFragment : Fragment(), ItemListener<BookModel> {
     }
 
     private fun setRecyclerViewAdapter(response: Response<List<BookModel>>) {
-        val linearLayoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        binding.selectedBookRelatedSeriesRecyclerView.layoutManager = linearLayoutManager
+        binding.selectedBookRelatedSeriesRecyclerView.layoutManager =
+            App.setLinearLayoutManager(context, LinearLayoutManager.HORIZONTAL)
         val relatedBooksLayoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.selectedBookRelatedBookRecyclerView.layoutManager = relatedBooksLayoutManager
@@ -307,7 +330,10 @@ class SelectedBookFragment : Fragment(), ItemListener<BookModel> {
                 model.bookLanguage,
                 model.bookStyle,
                 model.bookSeries,
-                model.marksCount
+                model.marksCount,
+                model.objectId,
+                model.marksSum,
+                model.isRated
             )
         )
     }

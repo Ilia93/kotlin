@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pocketbook.R
 import com.example.pocketbook.data.NetworkClient
-import com.example.pocketbook.data.network.model.BookModel
+import com.example.pocketbook.data.network.model.book_model.BookModel
 import com.example.pocketbook.databinding.SearchScreenSelectedCategoryFragmentBinding
 import com.example.pocketbook.presentation.screen.book.SelectedBookFragment
 import com.example.pocketbook.presentation.screen.main.MainActivity.Companion.LOAD_ERROR
@@ -98,7 +98,10 @@ class CategoryFragment : Fragment(), ItemListener<BookModel> {
                 model.bookLanguage,
                 model.bookStyle,
                 model.bookSeries,
-                model.marksCount
+                model.marksCount,
+                model.objectId,
+                model.marksSum,
+                model.isRated
             )
         )
     }

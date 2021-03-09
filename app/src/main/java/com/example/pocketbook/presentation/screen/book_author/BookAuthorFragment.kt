@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide
 import com.example.pocketbook.R
 import com.example.pocketbook.data.NetworkClient
 import com.example.pocketbook.data.network.model.BookAuthorModel
-import com.example.pocketbook.data.network.model.BookModel
+import com.example.pocketbook.data.network.model.book_model.BookModel
 import com.example.pocketbook.databinding.BookAuthorFragmentBinding
 import com.example.pocketbook.presentation.screen.book.SelectedBookFragment
 import com.example.pocketbook.presentation.screen.book_author.recycler_view.related_authors.RelatedAuthorsAdapter
@@ -37,6 +37,10 @@ class BookAuthorFragment : Fragment(), ItemListener<BookModel>, ImageListener {
             arguments.putString(BOOK_AUTHOR_ARG, bookAuthorName)
             fragment.arguments = arguments
             return fragment
+        }
+
+        fun putSelectedBookArgs(model: BookModel){
+
         }
     }
 
@@ -122,7 +126,7 @@ class BookAuthorFragment : Fragment(), ItemListener<BookModel>, ImageListener {
         }
     }
 
-    //TODO запрос не возвращает ответ с заданным параметром имени и фамиилл автора
+    //TODO запрос не возвращает ответ с заданным параметром имени и фамилии автора
     private fun getAuthorBooks() {
         NetworkClient.buildBookApiClient().getBookAuthor(authorNameFromArgument).enqueue(
             object : Callback<List<BookModel>> {
@@ -227,7 +231,10 @@ class BookAuthorFragment : Fragment(), ItemListener<BookModel>, ImageListener {
                 model.bookLanguage,
                 model.bookStyle,
                 model.bookSeries,
-                model.marksCount
+                model.marksCount,
+                model.objectId,
+                model.marksSum,
+                model.isRated
             )
         )
     }

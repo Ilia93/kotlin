@@ -13,8 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pocketbook.R
 import com.example.pocketbook.data.NetworkClient
-import com.example.pocketbook.data.network.model.BookModel
+import com.example.pocketbook.data.network.model.book_model.BookModel
 import com.example.pocketbook.databinding.MyBooksFragmentBinding
+import com.example.pocketbook.presentation.App
 import com.example.pocketbook.presentation.screen.book.SelectedBookFragment
 import com.example.pocketbook.presentation.screen.main.MainActivity.Companion.DATA_FAIL
 import com.example.pocketbook.presentation.screen.main.MainActivity.Companion.LOAD_ERROR
@@ -95,8 +96,8 @@ class MyBooksFragment : Fragment(), ItemListener<BookModel>,
     }
 
     private fun setBooksStatusRecyclerView() {
-        val linearManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        binding.myBooksBooksStatusRecyclerView.layoutManager = linearManager
+        binding.myBooksBooksStatusRecyclerView.layoutManager =
+            App.setLinearLayoutManager(context, LinearLayoutManager.VERTICAL)
         val adapter = BooksStatusAdapter(context, this, initializeBooksStatus())
         val itemDecoration = DividerItemDecoration(context, RecyclerView.VERTICAL)
         ResourcesCompat.getDrawable(resources, R.drawable.recycler_view_divider, null)?.let {
@@ -233,7 +234,10 @@ class MyBooksFragment : Fragment(), ItemListener<BookModel>,
                     model.bookLanguage,
                     model.bookStyle,
                     model.bookSeries,
-                    model.marksCount
+                    model.marksCount,
+                    model.objectId,
+                    model.marksSum,
+                    model.isRated
                 )
             )
         fragmentTransaction?.setTransition(TRANSIT_FRAGMENT_OPEN)

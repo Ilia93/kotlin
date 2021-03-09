@@ -1,5 +1,5 @@
 package com.example.pocketbook.presentation.screen.main.top
-
+/*
 import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
@@ -94,3 +94,4 @@ class ScreenPage : AppCompatActivity() {
         ofInt.start()
     }
 }
+*/

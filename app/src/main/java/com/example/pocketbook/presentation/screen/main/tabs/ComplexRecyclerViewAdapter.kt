@@ -41,7 +41,7 @@ class ComplexRecyclerViewAdapter(
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        TODO("Not yet implemented")
+
     }
 
     override fun getItemCount(): Int {

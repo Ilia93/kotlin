@@ -1,6 +1,7 @@
 package com.example.pocketbook.data.network.api
 
-import com.example.pocketbook.data.network.model.BookModel
+import com.example.pocketbook.data.network.model.book_model.BookModel
+import com.example.pocketbook.data.network.model.book_model.BookRating
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -15,7 +16,5 @@ interface BookApi {
     fun getBooksCount(): Call<String>
 
     @PUT("data/Book/{objectId}")
-    fun updateBook(@Path("objectId") objectId: String, @Body model: BookModel): Call<BookModel>
-
-
+    fun updateBookRating(@Path("objectId") objectId: String, @Body model: BookRating): Call<BookModel>
 }

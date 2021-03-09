@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pocketbook.R
 import com.example.pocketbook.data.NetworkClient
-import com.example.pocketbook.data.network.model.BookModel
+import com.example.pocketbook.data.network.model.book_model.BookModel
 import com.example.pocketbook.databinding.SearchScreenFragmentBinding
 import com.example.pocketbook.presentation.screen.main.MainActivity.Companion.DATA_FAIL
 import com.example.pocketbook.presentation.screen.main.top.ItemListener

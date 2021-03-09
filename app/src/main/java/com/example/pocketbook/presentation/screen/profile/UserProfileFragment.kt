@@ -4,14 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.pocketbook.R
+import com.example.pocketbook.data.NetworkClient
 import com.example.pocketbook.databinding.ProfileFragmentBinding
+import com.example.pocketbook.presentation.screen.main.MainActivity.Companion.DATA_FAIL
 import com.example.pocketbook.presentation.screen.profile.recycler_view.UserProfileAdapter
 import com.example.pocketbook.presentation.screen.profile.recycler_view.UserProfileDataClass
+import com.example.pocketbook.presentation.screen.subscribe.SubscribeFragment
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class UserProfileFragment : Fragment() {
@@ -42,13 +49,29 @@ class UserProfileFragment : Fragment() {
     ): View {
         binding = ProfileFragmentBinding.inflate(inflater, container, false)
         val view = binding.root
+        setClickListeners()
+        loadFinishedBooks()
         initRecyclerViewData()
         initRecyclerView()
         return view
     }
 
+    private fun setClickListeners() {
+        binding.myProfileBuySubscribe.setOnClickListener {
+            changeFragment(SubscribeFragment.getInstance())
+        }
+        binding.myProfileSettingsBtn.setOnClickListener {
+            showToast("Not implemented")
+        }
+    }
+
+    private fun changeFragment(fragment: Fragment) {
+        activity?.supportFragmentManager?.beginTransaction()
+            ?.replace(R.id.main_frame, fragment)?.commit()
+    }
+
     private fun initRecyclerViewData() {
-        addItem(0, READ, BOOKS, R.drawable.ic_launcher_background, "10")
+        addItem(0, READ, BOOKS, R.drawable.ic_launcher_background, "0")
         addItem(1, READ, PAGES, R.drawable.ic_launcher_background, "0")
         addItem(2, READING_SPEED, PAGES_PER_HOUR, R.drawable.ic_launcher_background, "0")
         addItem(3, ELAPSED_TIME, MINUTES, R.drawable.ic_launcher_background, "10")
@@ -79,6 +102,29 @@ class UserProfileFragment : Fragment() {
                 it
             )
         }
+    }
+
+    private fun loadFinishedBooks() {
+        NetworkClient.buildBookApiClient().getBooksCount().enqueue(
+            object : Callback<String> {
+                override fun onResponse(call: Call<String>, response: Response<String>) {
+                    if (response.isSuccessful && response.body() != null) {
+                        val result: String? = response.body()
+                        showToast("OK")
+
+                    }
+                }
+
+                override fun onFailure(call: Call<String>, t: Throwable) {
+                    showToast(DATA_FAIL)
+                }
+
+            }
+        )
+    }
+
+    private fun showToast(text: String) {
+        Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
     }
 
     override fun onStart() {

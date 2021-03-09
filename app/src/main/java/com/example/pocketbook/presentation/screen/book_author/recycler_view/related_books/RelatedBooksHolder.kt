@@ -2,7 +2,7 @@ package com.example.pocketbook.presentation.screen.book_author.recycler_view.rel
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.example.pocketbook.data.network.model.BookModel
+import com.example.pocketbook.data.network.model.book_model.BookModel
 import com.example.pocketbook.databinding.SelectedBookRelatedBooksItemBinding
 import com.example.pocketbook.presentation.screen.main.top.ItemListener
 
